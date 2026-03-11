@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TruthNation KE · Innocent Tech News Hub</title>
-    <!-- Font Awesome 6 (free) for subtle icons -->
+    <!-- Font Awesome 6 (free) for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -14,21 +14,42 @@
         }
 
         body {
-            background: #f4f1ec;  /* warm newsprint tone */
+            /* cloudy sky background – soft gradient + faint cloud shapes */
+            background: linear-gradient(145deg, #c0d9e8 0%, #e7eff8 60%, #f4efe6 100%);
             font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
             line-height: 1.6;
             padding: 2rem 1.5rem;
             color: #1f2a3a;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* fluffy cloud overlays (pure css) */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.45) 6%, transparent 20%),
+                        radial-gradient(circle at 95% 35%, rgba(255,255,255,0.5) 10%, transparent 25%),
+                        radial-gradient(circle at 30% 70%, rgba(255,255,250,0.6) 12%, transparent 28%),
+                        radial-gradient(circle at 70% 85%, rgba(255,255,255,0.4) 8%, transparent 22%),
+                        radial-gradient(circle at 5% 90%, rgba(255,255,240,0.55) 9%, transparent 24%),
+                        radial-gradient(circle at 88% 12%, rgba(255,255,255,0.5) 7%, transparent 20%);
+            z-index: 0;
         }
 
         .container {
             max-width: 1280px;
             margin: 0 auto;
-            background: white;
+            background: rgba(255, 255, 255, 0.9);   /* glassy newsprint effect */
+            backdrop-filter: blur(2px);
             border-radius: 32px 32px 24px 24px;
-            box-shadow: 0 20px 40px -15px rgba(0,20,30,0.25);
+            box-shadow: 0 20px 40px -10px rgba(0,20,30,0.4);
             overflow: hidden;
             border: 1px solid #e9e0d5;
+            position: relative;
+            z-index: 2;
         }
 
         /* header with dual brand */
@@ -141,45 +162,77 @@
             border-radius: 14px;
         }
 
-        /* different background accents for each section (their own colour) */
-        .politics-section { background: #fcf9f5; border-left: 8px solid #b13e3e; }
-        .business-section { background: #f5f7fa; border-left: 8px solid #1f7a5a; }
-        .sports-section { background: #f2f6f9; border-left: 8px solid #d97706; }
-        .features-section { background: #fcf6ef; border-left: 8px solid #6b4f8f; }
-        .topstory-section { background: #ffffff; border-left: 8px solid #0b1e2f; } /* top stories */
+        /* different background accents for each section */
+        .politics-section { background: #fcf9f5f2; border-left: 8px solid #b13e3e; }
+        .business-section { background: #f5f7faf2; border-left: 8px solid #1f7a5a; }
+        .sports-section { background: #f2f6f9f2; border-left: 8px solid #d97706; }
+        .features-section { background: #fcf6eff2; border-left: 8px solid #6b4f8f; }
+        .topstory-section { background: #fffffff2; border-left: 8px solid #0b1e2f; }
 
-        /* card grid for stories */
+        /* story grid */
         .story-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
             gap: 2rem;
         }
 
+        /* CARD — now includes an image placeholder with icon & background */
         .story-card {
             background: white;
             border-radius: 24px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            padding: 0;                /* remove padding to let image fit edge-to-edge */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
             border: 1px solid #efe5da;
             transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
 
         .story-card:hover {
             border-color: #c49a2b;
-            box-shadow: 0 8px 20px rgba(196,154,43,0.08);
+            box-shadow: 0 8px 24px rgba(196,154,43,0.15);
         }
 
+        /* image region — each news incident shown with colour background & icon */
+        .card-img {
+            background: #dde5ed;   /* base tone, overwritten per card if needed */
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: rgba(0,0,0,0.5);
+            position: relative;
+            background-size: cover;
+            background-blend-mode: overlay;
+        }
+
+        /* for variety, we set different background hints per card (via inline style or nth-of-type) */
+        .story-card:nth-child(1) .card-img { background: #b3d0d9; color: #1d4e6f; }
+        .story-card:nth-child(2) .card-img { background: #c5b8e6; color: #3d2f5f; }
+        .story-card:nth-child(3) .card-img { background: #e2c28b; color: #6f4d1a; }
+        .story-card:nth-child(4) .card-img { background: #b8d9c5; color: #1f5e3a; }
+        .story-card:nth-child(5) .card-img { background: #f5c9b0; color: #a6411b; }
+        .story-card:nth-child(6) .card-img { background: #cfb0b0; color: #611f1f; }
+
+        .card-content {
+            padding: 1.5rem 1.5rem 1.8rem;
+        }
+
+        /* coloured + bigger title */
         .story-card h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            line-height: 1.3;
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 0.6rem;
+            line-height: 1.2;
+            /* different colour per card - using cascading but we also add individual style */
         }
 
         .story-card .meta {
             font-size: 0.9rem;
             color: #6f5e4e;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             border-bottom: 1px dashed #ddd2c5;
             padding-bottom: 0.5rem;
         }
@@ -212,13 +265,26 @@
             margin-right: 0.6rem;
         }
 
-        /* opinion specific */
+        /* opinion block with image simulation */
         .opinion-block {
             background: #f3efe8;
             padding: 2rem;
             border-radius: 28px;
             margin-top: 1.5rem;
             border: 1px solid #dccfc1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .opinion-block::before {
+            content: "☁️☁️";
+            font-size: 6rem;
+            position: absolute;
+            bottom: -20px;
+            right: 10px;
+            opacity: 0.15;
+            pointer-events: none;
+            transform: rotate(5deg);
         }
 
         .opinion-author {
@@ -285,29 +351,34 @@
             <i class="fas fa-newspaper"></i> <span>2. TOP STORIES</span>
         </div>
         <div class="story-grid">
-            <!-- story 1 -->
+            <!-- story 1 - floods -->
             <div class="story-card">
-                <span class="badge-fact">fact-checked</span><span class="meta"> floods · climate</span>
-                <h3>Floods Wreak Havoc: 49 Dead as Heavy Rains Pound the Country</h3>
-                <p>Multi-agency response: 2,600+ families displaced, 600 livestock killed. CS Mulongo Barasa calls Kenya a "global warming hotspot," urges wetland regeneration.</p>
-                <div class="swahili-quote">
-                    <i class="fas fa-quote-left" style="color:#c49a2b;"></i> “Mvua imeleta maafa, lakini tutajenga upya kwa nguvu za kitaifa.”
+                <div class="card-img"><i class="fas fa-water"></i>🌊</div>
+                <div class="card-content">
+                    <span class="badge-fact">fact-checked</span><span class="meta"> floods · climate</span>
+                    <h3 style="color:#005a7a;">Floods Wreak Havoc: 49 Dead as Heavy Rains Pound the Country</h3>
+                    <p>Multi-agency response: 2,600+ families displaced, 600 livestock killed. CS Mulongo Barasa calls Kenya a "global warming hotspot," urges wetland regeneration.</p>
+                    <div class="swahili-quote"><i class="fas fa-quote-left" style="color:#c49a2b;"></i> “Mvua imeleta maafa, lakini tutajenga upya kwa nguvu za kitaifa.”</div>
                 </div>
             </div>
-            <!-- story 2 -->
+            <!-- story 2 - space -->
             <div class="story-card">
-                <span class="badge-fact">verified</span><span class="meta"> space · tech</span>
-                <h3>Kenya Goes Nuclear? Space Agency Pushes Satellite Tech to Curb Disasters</h3>
-                <p>KSA urges investment in satellite data; envoy Philip Thigo: “building data, connectivity to talent is essential.” Next launch eyed after <em>Taifa-1</em> success.</p>
-                <p>Brig. Hillary Kipkosgey: “Next time Kenya launches a satellite, know it’s a solution to our challenges.”</p>
+                <div class="card-img"><i class="fas fa-satellite"></i>🛰️</div>
+                <div class="card-content">
+                    <span class="badge-fact">verified</span><span class="meta"> space · tech</span>
+                    <h3 style="color:#1f5c99;">Kenya Goes Nuclear? Space Agency Pushes Satellite Tech to Curb Disasters</h3>
+                    <p>KSA urges investment in satellite data; envoy Philip Thigo: “building data, connectivity to talent is essential.” Next launch eyed after <em>Taifa-1</em> success.</p>
+                    <p>Brig. Hillary Kipkosgey: “Next time Kenya launches a satellite, know it’s a solution to our challenges.”</p>
+                </div>
             </div>
-            <!-- story 3 -->
+            <!-- story 3 - indigenous land -->
             <div class="story-card">
-                <span class="badge-fact">human rights</span><span class="meta"> indigenous · land</span>
-                <h3>"The Land is Our Mother" – KNCHR Exposes Marginalization</h3>
-                <p>Report <em>Voices from the Land</em> documents Ogiek, Sengwer, Maasai dispossession without consent. “When the land is taken, our identity is lost.”</p>
-                <div class="swahili-quote">
-                    “Ardhi ni mama yetu.” — Ogiek elder
+                <div class="card-img"><i class="fas fa-mountain"></i>⛰️</div>
+                <div class="card-content">
+                    <span class="badge-fact">human rights</span><span class="meta"> indigenous · land</span>
+                    <h3 style="color:#3f5c2e;">"The Land is Our Mother" – KNCHR Exposes Marginalization</h3>
+                    <p>Report <em>Voices from the Land</em> documents Ogiek, Sengwer, Maasai dispossession without consent. “When the land is taken, our identity is lost.”</p>
+                    <div class="swahili-quote">“Ardhi ni mama yetu.” — Ogiek elder</div>
                 </div>
             </div>
         </div>
@@ -318,14 +389,16 @@
         <div class="section-title">
             <i class="fas fa-landmark"></i> <span>3. POLITICS</span>
         </div>
+        <!-- a single long card but keeping with image -->
         <div class="story-card" style="max-width:100%;">
-            <span class="badge-fact">inside odm</span><span class="meta"> pact · scrutiny</span>
-            <h3>"One Out of Ten": Sifuna-Led Faction Torches ODM-UDA Pact Report</h3>
-            <p><strong>Nairobi Senator Edwin Sifuna</strong> – flanked by Babu Owino, Caroli Omondi – dismissed KICC event as “shameful charade,” gave government 10% score. Demands include audit of 2022 election, transparency on debt, and end to protest crackdowns.</p>
-            <div class="swahili-quote">
-                <i class="fas fa-quote-right"></i> “Hii ni serikali ya 10% — na hiyo ni generous sana.” — Sifuna
+            <div class="card-img" style="background:#cdb28b;"><i class="fas fa-gavel"></i>⚖️</div>
+            <div class="card-content">
+                <span class="badge-fact">inside odm</span><span class="meta"> pact · scrutiny</span>
+                <h3 style="color:#b13e3e;">"One Out of Ten": Sifuna-Led Faction Torches ODM-UDA Pact Report</h3>
+                <p><strong>Nairobi Senator Edwin Sifuna</strong> – flanked by Babu Owino, Caroli Omondi – dismissed KICC event as “shameful charade,” gave government 10% score. Demands include audit of 2022 election, transparency on debt, and end to protest crackdowns.</p>
+                <div class="swahili-quote"><i class="fas fa-quote-right"></i> “Hii ni serikali ya 10% — na hiyo ni generous sana.” — Sifuna</div>
+                <p><strong>Rift widens:</strong> Linda Mwananchi faction claims cooperation committee expired March 7, calls any extension unconstitutional.</p>
             </div>
-            <p><strong>Rift widens:</strong> Linda Mwananchi faction claims cooperation committee expired March 7, calls any extension unconstitutional.</p>
         </div>
     </section>
 
@@ -336,16 +409,25 @@
         </div>
         <div class="story-grid">
             <div class="story-card">
-                <h3>🇰🇪 Historic Listing: East Africa's First Industrial REIT Hits NSE</h3>
-                <p>ALP REIT – first USD-denominated security on NSE – raises $29.55M. UK government anchors with $24M. CEO Frank Mwiti: “historic milestone.”</p>
+                <div class="card-img"><i class="fas fa-chart-pie"></i>📈</div>
+                <div class="card-content">
+                    <h3 style="color:#1f7a5a;">🇰🇪 Historic Listing: East Africa's First Industrial REIT Hits NSE</h3>
+                    <p>ALP REIT – first USD-denominated security on NSE – raises $29.55M. UK government anchors with $24M. CEO Frank Mwiti: “historic milestone.”</p>
+                </div>
             </div>
             <div class="story-card">
-                <h3>🚬 BAT Kenya Goes Local to Beat Illicit Trade</h3>
-                <p>Targets 70% local tobacco sourcing in 2026 (up from 60%). Illicit cigarette market hits 45%, prompting cost-saving shift.</p>
+                <div class="card-img"><i class="fas fa-smoking"></i>🚬</div>
+                <div class="card-content">
+                    <h3 style="color:#a6531e;">BAT Kenya Goes Local to Beat Illicit Trade</h3>
+                    <p>Targets 70% local tobacco sourcing in 2026 (up from 60%). Illicit cigarette market hits 45%, prompting cost-saving shift.</p>
+                </div>
             </div>
             <div class="story-card">
-                <h3>📱 Safaricom Sale: MPs Amend Plan, Protect Workers</h3>
-                <p>Parliament strengthens job safeguards; no restructuring-related layoffs for agents/dealers for at least a decade. Sale to raise ≈Sh204B for infrastructure fund.</p>
+                <div class="card-img"><i class="fas fa-tower-cell"></i>📶</div>
+                <div class="card-content">
+                    <h3 style="color:#0077be;">Safaricom Sale: MPs Amend Plan, Protect Workers</h3>
+                    <p>Parliament strengthens job safeguards; no restructuring-related layoffs for agents/dealers for at least a decade. Sale to raise ≈Sh204B for infrastructure fund.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -357,14 +439,18 @@
         </div>
         <div class="story-grid">
             <div class="story-card">
-                <h3>⛳ Kenya Unveils Junior Golf Team for Africa Championship</h3>
-                <p>Windsor Golf Hotel, March 23-26. Boys (Junaid Manji, Tsevi Soni, Yuvraj Rajput, Mwathi Gicheru) fresh from Victoria Cup win; girls Belinda Wanjiru, Kanana Muthomi, Bianca Ngecu. 15 nations competing.</p>
+                <div class="card-img"><i class="fas fa-golf-ball-tee"></i>⛳</div>
+                <div class="card-content">
+                    <h3 style="color:#0c6b4b;">Kenya Unveils Junior Golf Team for Africa Championship</h3>
+                    <p>Windsor Golf Hotel, March 23-26. Boys (Junaid Manji, Tsevi Soni, Yuvraj Rajput, Mwathi Gicheru) fresh from Victoria Cup win; girls Belinda Wanjiru, Kanana Muthomi, Bianca Ngecu. 15 nations competing.</p>
+                </div>
             </div>
             <div class="story-card">
-                <h3>🚗 WRC Safari Rally: Indian Duo Targets Podium Repeat</h3>
-                <p>Naveen Puligilla & Musa Sherif (Ford Fiesta Rally 3) aim for repeat podium in WRC3. Co-driver Sherif: “roads extremely rough… heavy rain could change everything.” Rally runs March 12-15 in Naivasha.</p>
-                <div class="swahili-quote">
-                    “Hakuna kazi nyingine kama Safari Rally.” — local fans
+                <div class="card-img"><i class="fas fa-car"></i>🚗💨</div>
+                <div class="card-content">
+                    <h3 style="color:#b34b00;">WRC Safari Rally: Indian Duo Targets Podium Repeat</h3>
+                    <p>Naveen Puligilla & Musa Sherif (Ford Fiesta Rally 3) aim for repeat podium in WRC3. Co-driver Sherif: “roads extremely rough… heavy rain could change everything.” Rally runs March 12-15 in Naivasha.</p>
+                    <div class="swahili-quote">“Hakuna kazi nyingine kama Safari Rally.” — local fans</div>
                 </div>
             </div>
         </div>
@@ -377,15 +463,18 @@
         </div>
         <div class="opinion-block">
             <p class="opinion-author"><i class="fas fa-user-circle"></i> By Our Staff Writer</p>
-            <h2 style="font-size: 2rem; font-weight: 800; margin: 0.5rem 0 1rem;">[Opinion] Development vs. Identity: The Cost of "Progress" in Kenya's Hinterlands</h2>
+            <h2 style="font-size: 2rem; font-weight: 800; margin: 0.5rem 0 1rem; color:#3d2b5a;">[Opinion] Development vs. Identity: The Cost of "Progress" in Kenya's Hinterlands</h2>
             <p>The KNCHR report is a stark moral audit. We celebrate wind farms and geothermal plants, but the Ogiek elder's words — <strong>“The land is our mother”</strong> — should shake us. GDP growth cannot be built on dispossession. Free, Prior and Informed Consent (FPIC) is the minimum standard of decency. As PPPs expand, let’s ensure that those who call the land their mother are not left with nothing.</p>
             <hr>
             <p><i class="fas fa-comment"></i> <em>“You cannot build a modern economy on the backs of dispossessed citizens. Sustainable development must include everyone.”</em></p>
         </div>
-        <!-- extra feature snippet -->
-        <div style="margin-top: 1.5rem; background: white; border-radius: 18px; padding: 1rem 1.8rem; border-left: 4px solid #c49a2b;">
-            <span class="badge-fact">reader favorite</span>
-            <p style="margin-top: 0.5rem;"><i class="fas fa-book-open"></i> <strong>In case you missed it:</strong> “Voices from the Land” – full KNCHR report now public. Indigenous leaders plan to present findings to African Commission next month.</p>
+        <!-- extra feature snippet with image-ish background -->
+        <div style="margin-top: 1.5rem; background: white; border-radius: 18px; padding: 1rem 1.8rem; border-left: 4px solid #c49a2b; display: flex; gap:1rem; align-items:center; flex-wrap:wrap;">
+            <div style="font-size:3rem; background:#d2c4ad; width:70px; height:70px; border-radius: 50%; display: flex; align-items:center; justify-content:center;"><i class="fas fa-book-open"></i></div>
+            <div>
+                <span class="badge-fact">reader favorite</span>
+                <p style="margin-top: 0.5rem;"><strong>In case you missed it:</strong> “Voices from the Land” – full KNCHR report now public. Indigenous leaders plan to present findings to African Commission next month.</p>
+            </div>
         </div>
     </section>
 
@@ -399,4 +488,4 @@
 
 <!-- small footnote: generated prompt code with full HTML -->
 </body>
-  </html>
+</html>
