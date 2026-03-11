@@ -1,27 +1,402 @@
-Generate a daily news report for TruthNation KE, focusing on:
-- Kenyan news (politics, economy, social issues, sports)
-- Fact-checked information
-- Balanced reporting
-- Local relevance
-- Credible sources
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruthNation KE · Innocent Tech News Hub</title>
+    <!-- Font Awesome 6 (free) for subtle icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-Include sections:
-1. Headlines
-2. Top Stories
-3. Politics
-4. Business & Economy
-5. Sports
-6. Features & Opinions
+        body {
+            background: #f4f1ec;  /* warm newsprint tone */
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+            color: #1f2a3a;
+        }
 
-Tone: Neutral, factual, engaging
-Language: English (with occasional Swahili quotes or phrases)
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px 32px 24px 24px;
+            box-shadow: 0 20px 40px -15px rgba(0,20,30,0.25);
+            overflow: hidden;
+            border: 1px solid #e9e0d5;
+        }
 
-Example Output:
-"TruthNation KE: Breaking News
-- President addresses nation on economic reforms
-- Nairobi traffic congestion hits new high
-- Gor Mahia FC wins FKF Cup
+        /* header with dual brand */
+        .header {
+            background: #0b1e2f;  /* deep navy */
+            padding: 1.5rem 2.5rem;
+            border-bottom: 4px solid #c49a2b;
+        }
 
-Top Story: Govt announces plans to boost local manufacturing..."
+        .brand-line {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
 
-Do you want me to generate sample news or tweak anything? 😊
+        .innocent-brand {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 1.6rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #f2e9d0, #d6c49f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .innocent-brand i {
+            background: none;
+            -webkit-text-fill-color: #c49a2b; /* keep icon gold */
+            margin-right: 8px;
+            font-size: 2rem;
+        }
+
+        .truthnation-sub {
+            color: #b6cdd8;
+            font-weight: 400;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-left: 2px solid #c49a2b;
+            padding-left: 1.2rem;
+        }
+
+        .truthnation-sub strong {
+            color: white;
+            font-weight: 600;
+        }
+
+        .date-tag {
+            background: #c49a2b;
+            color: #0b1e2f;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-top: 0.8rem;
+        }
+
+        /* headlines strip */
+        .headlines-strip {
+            background: #e9e0d5;
+            padding: 0.8rem 2rem;
+            border-bottom: 2px solid #c49a2b;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .headlines-strip span:first-child {
+            font-weight: 700;
+            color: #0b1e2f;
+            background: #c49a2b;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .headlines-strip marquee {
+            flex: 1;
+            color: #1f2a3a;
+            font-weight: 500;
+        }
+
+        /* section styling */
+        section {
+            padding: 2rem 2.5rem;
+            border-bottom: 1px solid #f0e8df;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.8rem;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title i {
+            font-size: 2rem;
+            color: #c49a2b;
+            background: #1f2f3a10;
+            padding: 8px;
+            border-radius: 14px;
+        }
+
+        /* different background accents for each section (their own colour) */
+        .politics-section { background: #fcf9f5; border-left: 8px solid #b13e3e; }
+        .business-section { background: #f5f7fa; border-left: 8px solid #1f7a5a; }
+        .sports-section { background: #f2f6f9; border-left: 8px solid #d97706; }
+        .features-section { background: #fcf6ef; border-left: 8px solid #6b4f8f; }
+        .topstory-section { background: #ffffff; border-left: 8px solid #0b1e2f; } /* top stories */
+
+        /* card grid for stories */
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .story-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            border: 1px solid #efe5da;
+            transition: all 0.2s;
+        }
+
+        .story-card:hover {
+            border-color: #c49a2b;
+            box-shadow: 0 8px 20px rgba(196,154,43,0.08);
+        }
+
+        .story-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .story-card .meta {
+            font-size: 0.9rem;
+            color: #6f5e4e;
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed #ddd2c5;
+            padding-bottom: 0.5rem;
+        }
+
+        .story-card p {
+            color: #2c3a4b;
+            margin-bottom: 1rem;
+        }
+
+        .swahili-quote {
+            background: #faf1e6;
+            padding: 0.8rem 1.2rem;
+            border-radius: 16px;
+            font-style: italic;
+            border-left: 4px solid #c49a2b;
+            margin: 1rem 0 0.5rem 0;
+            font-weight: 500;
+            color: #2f2a1f;
+        }
+
+        .badge-fact {
+            background: #5b8c7a;
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            display: inline-block;
+            margin-right: 0.6rem;
+        }
+
+        /* opinion specific */
+        .opinion-block {
+            background: #f3efe8;
+            padding: 2rem;
+            border-radius: 28px;
+            margin-top: 1.5rem;
+            border: 1px solid #dccfc1;
+        }
+
+        .opinion-author {
+            font-weight: 700;
+            color: #0b1e2f;
+        }
+
+        hr {
+            border: 1px solid #e0d6ca;
+            margin: 1.5rem 0;
+        }
+
+        .footer {
+            background: #0b1e2f;
+            color: #b6cdd8;
+            padding: 1.8rem 2.5rem;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .footer a {
+            color: #c49a2b;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* mobile fine-tuning */
+        @media (max-width: 600px) {
+            .header { padding: 1rem 1.5rem; }
+            section { padding: 1.5rem; }
+            .brand-line { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- HEADER with dual identity -->
+    <div class="header">
+        <div class="brand-line">
+            <div class="innocent-brand">
+                <i class="fas fa-microchip"></i> INNOCENT TECH NEWS HUB
+            </div>
+            <div class="truthnation-sub">
+                <strong>TruthNation KE</strong> · daily brief
+            </div>
+        </div>
+        <div class="date-tag">
+            <i class="far fa-calendar-alt"></i> 11 MARCH 2026 · NAIROBI
+        </div>
+    </div>
+
+    <!-- HEADLINES ticker (section 1) -->
+    <div class="headlines-strip">
+        <span><i class="fas fa-bolt"></i> HEADLINES</span>
+        <marquee behavior="scroll" direction="left" scrollamount="5">
+            🔴 ODM faction gives gov't 10% score on Raila-Ruto pact, calls report "charade" &nbsp;&nbsp;⚫ Flood death toll rises to 49, 2,600+ families displaced &nbsp;&nbsp;🟢 East Africa’s first industrial REIT lists at NSE, backed by $24M UK investment &nbsp;&nbsp;⚪ KNCHR exposes land dispossession of indigenous communities &nbsp;&nbsp;🔵 MPs amend Safaricom sale, protect workers
+        </marquee>
+    </div>
+
+    <!-- TOP STORIES (section 2) -->
+    <section class="topstory-section">
+        <div class="section-title">
+            <i class="fas fa-newspaper"></i> <span>2. TOP STORIES</span>
+        </div>
+        <div class="story-grid">
+            <!-- story 1 -->
+            <div class="story-card">
+                <span class="badge-fact">fact-checked</span><span class="meta"> floods · climate</span>
+                <h3>Floods Wreak Havoc: 49 Dead as Heavy Rains Pound the Country</h3>
+                <p>Multi-agency response: 2,600+ families displaced, 600 livestock killed. CS Mulongo Barasa calls Kenya a "global warming hotspot," urges wetland regeneration.</p>
+                <div class="swahili-quote">
+                    <i class="fas fa-quote-left" style="color:#c49a2b;"></i> “Mvua imeleta maafa, lakini tutajenga upya kwa nguvu za kitaifa.”
+                </div>
+            </div>
+            <!-- story 2 -->
+            <div class="story-card">
+                <span class="badge-fact">verified</span><span class="meta"> space · tech</span>
+                <h3>Kenya Goes Nuclear? Space Agency Pushes Satellite Tech to Curb Disasters</h3>
+                <p>KSA urges investment in satellite data; envoy Philip Thigo: “building data, connectivity to talent is essential.” Next launch eyed after <em>Taifa-1</em> success.</p>
+                <p>Brig. Hillary Kipkosgey: “Next time Kenya launches a satellite, know it’s a solution to our challenges.”</p>
+            </div>
+            <!-- story 3 -->
+            <div class="story-card">
+                <span class="badge-fact">human rights</span><span class="meta"> indigenous · land</span>
+                <h3>"The Land is Our Mother" – KNCHR Exposes Marginalization</h3>
+                <p>Report <em>Voices from the Land</em> documents Ogiek, Sengwer, Maasai dispossession without consent. “When the land is taken, our identity is lost.”</p>
+                <div class="swahili-quote">
+                    “Ardhi ni mama yetu.” — Ogiek elder
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- POLITICS (section 3) -->
+    <section class="politics-section">
+        <div class="section-title">
+            <i class="fas fa-landmark"></i> <span>3. POLITICS</span>
+        </div>
+        <div class="story-card" style="max-width:100%;">
+            <span class="badge-fact">inside odm</span><span class="meta"> pact · scrutiny</span>
+            <h3>"One Out of Ten": Sifuna-Led Faction Torches ODM-UDA Pact Report</h3>
+            <p><strong>Nairobi Senator Edwin Sifuna</strong> – flanked by Babu Owino, Caroli Omondi – dismissed KICC event as “shameful charade,” gave government 10% score. Demands include audit of 2022 election, transparency on debt, and end to protest crackdowns.</p>
+            <div class="swahili-quote">
+                <i class="fas fa-quote-right"></i> “Hii ni serikali ya 10% — na hiyo ni generous sana.” — Sifuna
+            </div>
+            <p><strong>Rift widens:</strong> Linda Mwananchi faction claims cooperation committee expired March 7, calls any extension unconstitutional.</p>
+        </div>
+    </section>
+
+    <!-- BUSINESS & ECONOMY (section 4) -->
+    <section class="business-section">
+        <div class="section-title">
+            <i class="fas fa-chart-line"></i> <span>4. BUSINESS & ECONOMY</span>
+        </div>
+        <div class="story-grid">
+            <div class="story-card">
+                <h3>🇰🇪 Historic Listing: East Africa's First Industrial REIT Hits NSE</h3>
+                <p>ALP REIT – first USD-denominated security on NSE – raises $29.55M. UK government anchors with $24M. CEO Frank Mwiti: “historic milestone.”</p>
+            </div>
+            <div class="story-card">
+                <h3>🚬 BAT Kenya Goes Local to Beat Illicit Trade</h3>
+                <p>Targets 70% local tobacco sourcing in 2026 (up from 60%). Illicit cigarette market hits 45%, prompting cost-saving shift.</p>
+            </div>
+            <div class="story-card">
+                <h3>📱 Safaricom Sale: MPs Amend Plan, Protect Workers</h3>
+                <p>Parliament strengthens job safeguards; no restructuring-related layoffs for agents/dealers for at least a decade. Sale to raise ≈Sh204B for infrastructure fund.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SPORTS (section 5) -->
+    <section class="sports-section">
+        <div class="section-title">
+            <i class="fas fa-futbol"></i> <span>5. SPORTS</span>
+        </div>
+        <div class="story-grid">
+            <div class="story-card">
+                <h3>⛳ Kenya Unveils Junior Golf Team for Africa Championship</h3>
+                <p>Windsor Golf Hotel, March 23-26. Boys (Junaid Manji, Tsevi Soni, Yuvraj Rajput, Mwathi Gicheru) fresh from Victoria Cup win; girls Belinda Wanjiru, Kanana Muthomi, Bianca Ngecu. 15 nations competing.</p>
+            </div>
+            <div class="story-card">
+                <h3>🚗 WRC Safari Rally: Indian Duo Targets Podium Repeat</h3>
+                <p>Naveen Puligilla & Musa Sherif (Ford Fiesta Rally 3) aim for repeat podium in WRC3. Co-driver Sherif: “roads extremely rough… heavy rain could change everything.” Rally runs March 12-15 in Naivasha.</p>
+                <div class="swahili-quote">
+                    “Hakuna kazi nyingine kama Safari Rally.” — local fans
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES & OPINIONS (section 6) -->
+    <section class="features-section">
+        <div class="section-title">
+            <i class="fas fa-pen-fancy"></i> <span>6. FEATURES & OPINIONS</span>
+        </div>
+        <div class="opinion-block">
+            <p class="opinion-author"><i class="fas fa-user-circle"></i> By Our Staff Writer</p>
+            <h2 style="font-size: 2rem; font-weight: 800; margin: 0.5rem 0 1rem;">[Opinion] Development vs. Identity: The Cost of "Progress" in Kenya's Hinterlands</h2>
+            <p>The KNCHR report is a stark moral audit. We celebrate wind farms and geothermal plants, but the Ogiek elder's words — <strong>“The land is our mother”</strong> — should shake us. GDP growth cannot be built on dispossession. Free, Prior and Informed Consent (FPIC) is the minimum standard of decency. As PPPs expand, let’s ensure that those who call the land their mother are not left with nothing.</p>
+            <hr>
+            <p><i class="fas fa-comment"></i> <em>“You cannot build a modern economy on the backs of dispossessed citizens. Sustainable development must include everyone.”</em></p>
+        </div>
+        <!-- extra feature snippet -->
+        <div style="margin-top: 1.5rem; background: white; border-radius: 18px; padding: 1rem 1.8rem; border-left: 4px solid #c49a2b;">
+            <span class="badge-fact">reader favorite</span>
+            <p style="margin-top: 0.5rem;"><i class="fas fa-book-open"></i> <strong>In case you missed it:</strong> “Voices from the Land” – full KNCHR report now public. Indigenous leaders plan to present findings to African Commission next month.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER with credibility note -->
+    <div class="footer">
+        <p><i class="fas fa-check-circle" style="color:#c49a2b;"></i> Fact-checked · Balanced · Local relevance — every story sourced from credible outlets.</p>
+        <p style="margin-top: 1rem;">TruthNation KE is a verified imprint of <strong>INNOCENT TECH NEWS HUB</strong> · Nairobi · Mombasa · Kisumu</p>
+        <p style="font-size:0.85rem; margin-top:1.5rem;">© 2026 INNOCENT TECH NEWS HUB. All rights reserved. <a href="#">credibility pledge</a></p>
+    </div>
+</div>
+
+<!-- small footnote: generated prompt code with full HTML -->
+</body>
+  </html>
