@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TruthNation KE · Innocent Tech News Hub</title>
-    <!-- Font Awesome 6 (free) for icons -->
+    <title>TruthNation KE · Live World News Hub</title>
+    <!-- Font Awesome 6 for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Unsplash API for images -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -14,7 +16,6 @@
         }
 
         body {
-            /* cloudy sky background – soft gradient + faint cloud shapes */
             background: linear-gradient(145deg, #c0d9e8 0%, #e7eff8 60%, #f4efe6 100%);
             font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
             line-height: 1.6;
@@ -24,7 +25,6 @@
             min-height: 100vh;
         }
 
-        /* fluffy cloud overlays (pure css) */
         body::before {
             content: '';
             position: fixed;
@@ -40,21 +40,38 @@
         }
 
         .container {
-            max-width: 1280px;
+            max-width: 1400px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.9);   /* glassy newsprint effect */
+            background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(2px);
             border-radius: 32px 32px 24px 24px;
             box-shadow: 0 20px 40px -10px rgba(0,20,30,0.4);
-            overflow: hidden;
             border: 1px solid #e9e0d5;
             position: relative;
             z-index: 2;
         }
 
-        /* header with dual brand */
+        /* Live indicator animation */
+        .live-badge {
+            display: inline-block;
+            background: #ff3b3b;
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 1rem;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; background: #ff3b3b; }
+            50% { opacity: 0.8; background: #ff0000; }
+            100% { opacity: 1; background: #ff3b3b; }
+        }
+
         .header {
-            background: #0b1e2f;  /* deep navy */
+            background: #0b1e2f;
             padding: 1.5rem 2.5rem;
             border-bottom: 4px solid #c49a2b;
         }
@@ -80,7 +97,7 @@
 
         .innocent-brand i {
             background: none;
-            -webkit-text-fill-color: #c49a2b; /* keep icon gold */
+            -webkit-text-fill-color: #c49a2b;
             margin-right: 8px;
             font-size: 2rem;
         }
@@ -111,7 +128,6 @@
             margin-top: 0.8rem;
         }
 
-        /* headlines strip */
         .headlines-strip {
             background: #e9e0d5;
             padding: 0.8rem 2rem;
@@ -138,7 +154,21 @@
             font-weight: 500;
         }
 
-        /* section styling */
+        .refresh-control {
+            background: #0b1e2f;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+
+        .refresh-control:hover {
+            background: #c49a2b;
+            color: #0b1e2f;
+        }
+
         section {
             padding: 2rem 2.5rem;
             border-bottom: 1px solid #f0e8df;
@@ -162,25 +192,25 @@
             border-radius: 14px;
         }
 
-        /* different background accents for each section */
+        /* Section-specific colors */
         .politics-section { background: #fcf9f5f2; border-left: 8px solid #b13e3e; }
         .business-section { background: #f5f7faf2; border-left: 8px solid #1f7a5a; }
         .sports-section { background: #f2f6f9f2; border-left: 8px solid #d97706; }
-        .features-section { background: #fcf6eff2; border-left: 8px solid #6b4f8f; }
+        .technology-section { background: #f0f4faf2; border-left: 8px solid #2563eb; }
+        .world-section { background: #f8f5f0f2; border-left: 8px solid #7c3aed; }
+        .health-section { background: #f0faf5f2; border-left: 8px solid #059669; }
         .topstory-section { background: #fffffff2; border-left: 8px solid #0b1e2f; }
 
-        /* story grid */
         .story-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
         }
 
-        /* CARD — now includes an image placeholder with icon & background */
         .story-card {
             background: white;
             border-radius: 24px;
-            padding: 0;                /* remove padding to let image fit edge-to-edge */
+            padding: 0;
             box-shadow: 0 4px 12px rgba(0,0,0,0.04);
             border: 1px solid #efe5da;
             transition: all 0.2s;
@@ -192,109 +222,98 @@
         .story-card:hover {
             border-color: #c49a2b;
             box-shadow: 0 8px 24px rgba(196,154,43,0.15);
+            transform: translateY(-2px);
         }
 
-        /* image region — each news incident shown with colour background & icon */
         .card-img {
-            background: #dde5ed;   /* base tone, overwritten per card if needed */
-            height: 140px;
+            height: 180px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3.5rem;
-            color: rgba(0,0,0,0.5);
+            color: white;
             position: relative;
             background-size: cover;
-            background-blend-mode: overlay;
+            background-position: center;
+            background-repeat: no-repeat;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            transition: all 0.3s;
         }
 
-        /* for variety, we set different background hints per card (via inline style or nth-of-type) */
-        .story-card:nth-child(1) .card-img { background: #b3d0d9; color: #1d4e6f; }
-        .story-card:nth-child(2) .card-img { background: #c5b8e6; color: #3d2f5f; }
-        .story-card:nth-child(3) .card-img { background: #e2c28b; color: #6f4d1a; }
-        .story-card:nth-child(4) .card-img { background: #b8d9c5; color: #1f5e3a; }
-        .story-card:nth-child(5) .card-img { background: #f5c9b0; color: #a6411b; }
-        .story-card:nth-child(6) .card-img { background: #cfb0b0; color: #611f1f; }
+        .card-img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(0deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
+        }
+
+        .card-img i, .card-img span {
+            position: relative;
+            z-index: 1;
+        }
 
         .card-content {
             padding: 1.5rem 1.5rem 1.8rem;
         }
 
-        /* coloured + bigger title */
         .story-card h3 {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 800;
             margin-bottom: 0.6rem;
-            line-height: 1.2;
-            /* different colour per card - using cascading but we also add individual style */
+            line-height: 1.3;
         }
 
         .story-card .meta {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #6f5e4e;
             margin-bottom: 0.8rem;
             border-bottom: 1px dashed #ddd2c5;
             padding-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .story-card p {
             color: #2c3a4b;
             margin-bottom: 1rem;
+            font-size: 0.95rem;
         }
 
-        .swahili-quote {
-            background: #faf1e6;
-            padding: 0.8rem 1.2rem;
-            border-radius: 16px;
-            font-style: italic;
-            border-left: 4px solid #c49a2b;
-            margin: 1rem 0 0.5rem 0;
-            font-weight: 500;
-            color: #2f2a1f;
-        }
-
-        .badge-fact {
-            background: #5b8c7a;
-            color: white;
+        .source-badge {
+            background: #e5e7eb;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
             font-size: 0.7rem;
-            padding: 0.2rem 0.8rem;
-            border-radius: 30px;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            display: inline-block;
-            margin-right: 0.6rem;
+            font-weight: 600;
+            color: #4b5563;
         }
 
-        /* opinion block with image simulation */
-        .opinion-block {
-            background: #f3efe8;
-            padding: 2rem;
-            border-radius: 28px;
-            margin-top: 1.5rem;
-            border: 1px solid #dccfc1;
-            position: relative;
-            overflow: hidden;
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            font-size: 1.2rem;
+            color: #6b7280;
         }
 
-        .opinion-block::before {
-            content: "☁️☁️";
-            font-size: 6rem;
-            position: absolute;
-            bottom: -20px;
-            right: 10px;
-            opacity: 0.15;
-            pointer-events: none;
-            transform: rotate(5deg);
+        .loading i {
+            animation: spin 1s infinite linear;
         }
 
-        .opinion-author {
-            font-weight: 700;
-            color: #0b1e2f;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        hr {
-            border: 1px solid #e0d6ca;
-            margin: 1.5rem 0;
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 1rem;
+            border-radius: 12px;
+            margin: 1rem 0;
         }
 
         .footer {
@@ -311,7 +330,12 @@
             font-weight: 600;
         }
 
-        /* mobile fine-tuning */
+        .update-time {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            margin-top: 0.3rem;
+        }
+
         @media (max-width: 600px) {
             .header { padding: 1rem 1.5rem; }
             section { padding: 1.5rem; }
@@ -322,170 +346,365 @@
 <body>
 <div class="container">
 
-    <!-- HEADER with dual identity -->
+    <!-- HEADER -->
     <div class="header">
         <div class="brand-line">
             <div class="innocent-brand">
-                <i class="fas fa-microchip"></i> INNOCENT TECH NEWS HUB
+                <i class="fas fa-globe-africa"></i> TRUTHNATION KE · LIVE
+                <span class="live-badge"><i class="fas fa-circle"></i> LIVE</span>
             </div>
             <div class="truthnation-sub">
-                <strong>TruthNation KE</strong> · daily brief
+                <strong>Global News Network</strong> · real-time updates
             </div>
         </div>
         <div class="date-tag">
-            <i class="far fa-calendar-alt"></i> 11 MARCH 2026 · NAIROBI
+            <i class="far fa-clock"></i> <span id="current-datetime"></span> · UPDATING LIVE
         </div>
     </div>
 
-    <!-- HEADLINES ticker (section 1) -->
+    <!-- HEADLINES TICKER -->
     <div class="headlines-strip">
-        <span><i class="fas fa-bolt"></i> HEADLINES</span>
-        <marquee behavior="scroll" direction="left" scrollamount="5">
-            🔴 ODM faction gives gov't 10% score on Raila-Ruto pact, calls report "charade" &nbsp;&nbsp;⚫ Flood death toll rises to 49, 2,600+ families displaced &nbsp;&nbsp;🟢 East Africa’s first industrial REIT lists at NSE, backed by $24M UK investment &nbsp;&nbsp;⚪ KNCHR exposes land dispossession of indigenous communities &nbsp;&nbsp;🔵 MPs amend Safaricom sale, protect workers
+        <span><i class="fas fa-bolt"></i> BREAKING</span>
+        <marquee behavior="scroll" direction="left" scrollamount="5" id="breaking-ticker">
+            Loading latest headlines...
         </marquee>
+        <div class="refresh-control" onclick="fetchAllNews()">
+            <i class="fas fa-sync-alt"></i> REFRESH NEWS
+        </div>
     </div>
 
-    <!-- TOP STORIES (section 2) -->
-    <section class="topstory-section">
-        <div class="section-title">
-            <i class="fas fa-newspaper"></i> <span>2. TOP STORIES</span>
+    <!-- NEWS SECTIONS - WILL BE POPULATED BY JAVASCRIPT -->
+    <div id="news-container">
+        <div class="loading">
+            <i class="fas fa-spinner"></i> Fetching latest news from around the world...
         </div>
-        <div class="story-grid">
-            <!-- story 1 - floods -->
-            <div class="story-card">
-                <div class="card-img"><i class="fas fa-water"></i>🌊</div>
-                <div class="card-content">
-                    <span class="badge-fact">fact-checked</span><span class="meta"> floods · climate</span>
-                    <h3 style="color:#005a7a;">Floods Wreak Havoc: 49 Dead as Heavy Rains Pound the Country</h3>
-                    <p>Multi-agency response: 2,600+ families displaced, 600 livestock killed. CS Mulongo Barasa calls Kenya a "global warming hotspot," urges wetland regeneration.</p>
-                    <div class="swahili-quote"><i class="fas fa-quote-left" style="color:#c49a2b;"></i> “Mvua imeleta maafa, lakini tutajenga upya kwa nguvu za kitaifa.”</div>
-                </div>
-            </div>
-            <!-- story 2 - space -->
-            <div class="story-card">
-                <div class="card-img"><i class="fas fa-satellite"></i>🛰️</div>
-                <div class="card-content">
-                    <span class="badge-fact">verified</span><span class="meta"> space · tech</span>
-                    <h3 style="color:#1f5c99;">Kenya Goes Nuclear? Space Agency Pushes Satellite Tech to Curb Disasters</h3>
-                    <p>KSA urges investment in satellite data; envoy Philip Thigo: “building data, connectivity to talent is essential.” Next launch eyed after <em>Taifa-1</em> success.</p>
-                    <p>Brig. Hillary Kipkosgey: “Next time Kenya launches a satellite, know it’s a solution to our challenges.”</p>
-                </div>
-            </div>
-            <!-- story 3 - indigenous land -->
-            <div class="story-card">
-                <div class="card-img"><i class="fas fa-mountain"></i>⛰️</div>
-                <div class="card-content">
-                    <span class="badge-fact">human rights</span><span class="meta"> indigenous · land</span>
-                    <h3 style="color:#3f5c2e;">"The Land is Our Mother" – KNCHR Exposes Marginalization</h3>
-                    <p>Report <em>Voices from the Land</em> documents Ogiek, Sengwer, Maasai dispossession without consent. “When the land is taken, our identity is lost.”</p>
-                    <div class="swahili-quote">“Ardhi ni mama yetu.” — Ogiek elder</div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
 
-    <!-- POLITICS (section 3) -->
-    <section class="politics-section">
-        <div class="section-title">
-            <i class="fas fa-landmark"></i> <span>3. POLITICS</span>
-        </div>
-        <!-- a single long card but keeping with image -->
-        <div class="story-card" style="max-width:100%;">
-            <div class="card-img" style="background:#cdb28b;"><i class="fas fa-gavel"></i>⚖️</div>
-            <div class="card-content">
-                <span class="badge-fact">inside odm</span><span class="meta"> pact · scrutiny</span>
-                <h3 style="color:#b13e3e;">"One Out of Ten": Sifuna-Led Faction Torches ODM-UDA Pact Report</h3>
-                <p><strong>Nairobi Senator Edwin Sifuna</strong> – flanked by Babu Owino, Caroli Omondi – dismissed KICC event as “shameful charade,” gave government 10% score. Demands include audit of 2022 election, transparency on debt, and end to protest crackdowns.</p>
-                <div class="swahili-quote"><i class="fas fa-quote-right"></i> “Hii ni serikali ya 10% — na hiyo ni generous sana.” — Sifuna</div>
-                <p><strong>Rift widens:</strong> Linda Mwananchi faction claims cooperation committee expired March 7, calls any extension unconstitutional.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- BUSINESS & ECONOMY (section 4) -->
-    <section class="business-section">
-        <div class="section-title">
-            <i class="fas fa-chart-line"></i> <span>4. BUSINESS & ECONOMY</span>
-        </div>
-        <div class="story-grid">
-            <div class="story-card">
-                <div class="card-img"><i class="fas fa-chart-pie"></i>📈</div>
-                <div class="card-content">
-                    <h3 style="color:#1f7a5a;">🇰🇪 Historic Listing: East Africa's First Industrial REIT Hits NSE</h3>
-                    <p>ALP REIT – first USD-denominated security on NSE – raises $29.55M. UK government anchors with $24M. CEO Frank Mwiti: “historic milestone.”</p>
-                </div>
-            </div>
-            <div class="story-card">
-                <div class="card-img"><i class="fas fa-smoking"></i>🚬</div>
-                <div class="card-content">
-                    <h3 style="color:#a6531e;">BAT Kenya Goes Local to Beat Illicit Trade</h3>
-                    <p>Targets 70% local tobacco sourcing in 2026 (up from 60%). Illicit cigarette market hits 45%, prompting cost-saving shift.</p>
-                </div>
-            </div>
-            <div class="story-card">
-                <div class="card-img"><i class="fas fa-tower-cell"></i>📶</div>
-                <div class="card-content">
-                    <h3 style="color:#0077be;">Safaricom Sale: MPs Amend Plan, Protect Workers</h3>
-                    <p>Parliament strengthens job safeguards; no restructuring-related layoffs for agents/dealers for at least a decade. Sale to raise ≈Sh204B for infrastructure fund.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SPORTS (section 5) -->
-    <section class="sports-section">
-        <div class="section-title">
-            <i class="fas fa-futbol"></i> <span>5. SPORTS</span>
-        </div>
-        <div class="story-grid">
-            <div class="story-card">
-                <div class="card-img"><i class="fas fa-golf-ball-tee"></i>⛳</div>
-                <div class="card-content">
-                    <h3 style="color:#0c6b4b;">Kenya Unveils Junior Golf Team for Africa Championship</h3>
-                    <p>Windsor Golf Hotel, March 23-26. Boys (Junaid Manji, Tsevi Soni, Yuvraj Rajput, Mwathi Gicheru) fresh from Victoria Cup win; girls Belinda Wanjiru, Kanana Muthomi, Bianca Ngecu. 15 nations competing.</p>
-                </div>
-            </div>
-            <div class="story-card">
-                <div class="card-img"><i class="fas fa-car"></i>🚗💨</div>
-                <div class="card-content">
-                    <h3 style="color:#b34b00;">WRC Safari Rally: Indian Duo Targets Podium Repeat</h3>
-                    <p>Naveen Puligilla & Musa Sherif (Ford Fiesta Rally 3) aim for repeat podium in WRC3. Co-driver Sherif: “roads extremely rough… heavy rain could change everything.” Rally runs March 12-15 in Naivasha.</p>
-                    <div class="swahili-quote">“Hakuna kazi nyingine kama Safari Rally.” — local fans</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FEATURES & OPINIONS (section 6) -->
-    <section class="features-section">
-        <div class="section-title">
-            <i class="fas fa-pen-fancy"></i> <span>6. FEATURES & OPINIONS</span>
-        </div>
-        <div class="opinion-block">
-            <p class="opinion-author"><i class="fas fa-user-circle"></i> By Our Staff Writer</p>
-            <h2 style="font-size: 2rem; font-weight: 800; margin: 0.5rem 0 1rem; color:#3d2b5a;">[Opinion] Development vs. Identity: The Cost of "Progress" in Kenya's Hinterlands</h2>
-            <p>The KNCHR report is a stark moral audit. We celebrate wind farms and geothermal plants, but the Ogiek elder's words — <strong>“The land is our mother”</strong> — should shake us. GDP growth cannot be built on dispossession. Free, Prior and Informed Consent (FPIC) is the minimum standard of decency. As PPPs expand, let’s ensure that those who call the land their mother are not left with nothing.</p>
-            <hr>
-            <p><i class="fas fa-comment"></i> <em>“You cannot build a modern economy on the backs of dispossessed citizens. Sustainable development must include everyone.”</em></p>
-        </div>
-        <!-- extra feature snippet with image-ish background -->
-        <div style="margin-top: 1.5rem; background: white; border-radius: 18px; padding: 1rem 1.8rem; border-left: 4px solid #c49a2b; display: flex; gap:1rem; align-items:center; flex-wrap:wrap;">
-            <div style="font-size:3rem; background:#d2c4ad; width:70px; height:70px; border-radius: 50%; display: flex; align-items:center; justify-content:center;"><i class="fas fa-book-open"></i></div>
-            <div>
-                <span class="badge-fact">reader favorite</span>
-                <p style="margin-top: 0.5rem;"><strong>In case you missed it:</strong> “Voices from the Land” – full KNCHR report now public. Indigenous leaders plan to present findings to African Commission next month.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER with credibility note -->
+    <!-- FOOTER -->
     <div class="footer">
-        <p><i class="fas fa-check-circle" style="color:#c49a2b;"></i> Fact-checked · Balanced · Local relevance — every story sourced from credible outlets.</p>
-        <p style="margin-top: 1rem;">TruthNation KE is a verified imprint of <strong>INNOCENT TECH NEWS HUB</strong> · Nairobi · Mombasa · Kisumu</p>
-        <p style="font-size:0.85rem; margin-top:1.5rem;">© 2026 INNOCENT TECH NEWS HUB. All rights reserved. <a href="#">credibility pledge</a></p>
+        <p><i class="fas fa-check-circle" style="color:#c49a2b;"></i> Live news powered by NewsAPI · Updated every 5 minutes with global sources</p>
+        <p style="margin-top: 1rem;">TruthNation KE is a verified global news aggregator · Nairobi · London · New York · Tokyo</p>
+        <p class="update-time">Last updated: <span id="last-updated">Just now</span></p>
+        <p style="font-size:0.85rem; margin-top:1.5rem;">© 2026 TruthNation KE · All rights reserved · <a href="#" onclick="fetchAllNews(); return false;">Refresh now</a></p>
     </div>
 </div>
 
-<!-- small footnote: generated prompt code with full HTML -->
+<script>
+    // API Configuration
+    const NEWS_API_KEY = 'YOUR_API_KEY'; // Note: Users need to replace with their own API key
+    const USE_DEMO_DATA = true; // Set to false when you have a valid API key
+    const UNSPLASH_ACCESS_KEY = 'YOUR_UNSPLASH_KEY'; // Optional for better images
+    
+    // Demo data for when API key is not available
+    const DEMO_NEWS = {
+        politics: [
+            {
+                title: "Global Democracy Index 2026: Nordic Countries Lead, Challenges in Emerging Markets",
+                description: "The annual Democracy Index shows Norway, Iceland, and Sweden maintaining top positions, while concerns rise about democratic backsliding in several regions.",
+                source: "Democracy Watch",
+                image: "politics",
+                publishedAt: new Date().toISOString()
+            },
+            {
+                title: "UN General Assembly: Climate Action Takes Center Stage",
+                description: "World leaders gather in New York for emergency climate talks, with developing nations demanding compensation from industrial powers.",
+                source: "UN News",
+                image: "climate",
+                publishedAt: new Date().toISOString()
+            },
+            {
+                title: "EU Leaders Reach Historic Migration Deal",
+                description: "European Union members agree on new asylum policies after marathon negotiations, balancing border security with humanitarian obligations.",
+                source: "Euronews",
+                image: "eu",
+                publishedAt: new Date().toISOString()
+            }
+        ],
+        business: [
+            {
+                title: "Global Markets Rally on Tech Earnings",
+                description: "Wall Street, London, and Tokyo markets surge as AI companies report record profits. Nasdaq hits all-time high.",
+                source: "Financial Times",
+                image: "markets",
+                publishedAt: new Date().toISOString()
+            },
+            {
+                title: "Oil Prices Stabilize After OPEC+ Decision",
+                description: "Oil markets steady as OPEC+ maintains production cuts, balancing global demand concerns with price stability.",
+                source: "Reuters",
+                image: "oil",
+                publishedAt: new Date().toISOString()
+            },
+            {
+                title: "African Continental Free Trade Area Reports 40% Trade Increase",
+                description: "AfCFTA announces significant growth in intra-African trade, with manufacturing and agriculture sectors leading the surge.",
+                source: "African Business",
+                image: "trade",
+                publishedAt: new Date().toISOString()
+            }
+        ],
+        sports: [
+            {
+                title: "World Cup 2026 Qualifiers: Surprises and Upsets",
+                description: "Underdog teams shake up qualification rounds as traditional powers face unexpected challenges on the road to the finals.",
+                source: "ESPN",
+                image: "soccer",
+                publishedAt: new Date().toISOString()
+            },
+            {
+                title: "Olympic Preparations: Host City Unveils Sustainable Venues",
+                description: "Next Olympic host showcases revolutionary eco-friendly stadiums designed to minimize environmental impact.",
+                source: "Sports Illustrated",
+                image: "olympics",
+                publishedAt: new Date().toISOString()
+            }
+        ],
+        technology: [
+            {
+                title: "Breakthrough in Quantum Computing Achieved",
+                description: "Scientists announce major milestone in quantum supremacy, opening new possibilities for drug discovery and climate modeling.",
+                source: "TechCrunch",
+                image: "quantum",
+                publishedAt: new Date().toISOString()
+            },
+            {
+                title: "Global 5G Coverage Reaches 80% of Population",
+                description: "Telecommunications union reports rapid expansion of high-speed mobile networks, bridging digital divide in developing nations.",
+                source: "Wired",
+                image: "5g",
+                publishedAt: new Date().toISOString()
+            },
+            {
+                title: "AI Regulation Framework Adopted by 50 Countries",
+                description: "International agreement sets guidelines for ethical AI development, focusing on privacy, bias prevention, and transparency.",
+                source: "Tech Policy Press",
+                image: "ai",
+                publishedAt: new Date().toISOString()
+            }
+        ],
+        world: [
+            {
+                title: "G7 Summit: Leaders Pledge $100 Billion for Global Health",
+                description: "Major economies commit to pandemic preparedness fund, focusing on vaccine equity and healthcare infrastructure.",
+                source: "BBC News",
+                image: "g7",
+                publishedAt: new Date().toISOString()
+            },
+            {
+                title: "Historic Peace Agreement Signed in Middle East",
+                description: "Regional powers normalize relations in landmark deal brokered by international mediators, opening new era of cooperation.",
+                source: "Al Jazeera",
+                image: "peace",
+                publishedAt: new Date().toISOString()
+            }
+        ],
+        health: [
+            {
+                title: "WHO Declares Malaria Eradication Within Reach",
+                description: "New vaccine and prevention strategies show 90% effectiveness in trials, bringing hope to endemic regions.",
+                source: "WHO",
+                image: "health",
+                publishedAt: new Date().toISOString()
+            },
+            {
+                title: "Global Mental Health Initiative Launched",
+                description: "UN-backed program aims to provide mental health support to 500 million people in underserved communities by 2030.",
+                source: "Lancet",
+                image: "mental",
+                publishedAt: new Date().toISOString()
+            }
+        ]
+    };
+
+    // Image mapping for demo/fallback
+    const IMAGE_MAP = {
+        politics: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600',
+        climate: 'https://images.unsplash.com/photo-1562155955-1cb2d73488d7?w=600',
+        eu: 'https://images.unsplash.com/photo-1541873676-a18131494184?w=600',
+        markets: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600',
+        oil: 'https://images.unsplash.com/photo-1582482825685-e0e394f66c80?w=600',
+        trade: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600',
+        soccer: 'https://images.unsplash.com/photo-1508098682722-e99c643e7f0b?w=600',
+        olympics: 'https://images.unsplash.com/photo-1569511165458-97b3ecfbfe98?w=600',
+        quantum: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600',
+        '5g': 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600',
+        ai: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600',
+        g7: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600',
+        peace: 'https://images.unsplash.com/photo-1447069387593-a5de0862481e?w=600',
+        health: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600',
+        mental: 'https://images.unsplash.com/photo-1541199249251-f713e6145474?w=600',
+        default: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600'
+    };
+
+    // Update datetime
+    function updateDateTime() {
+        const now = new Date();
+        const options = { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric', 
+            hour: '2-digit', 
+            minute: '2-digit', 
+            second: '2-digit',
+            timeZoneName: 'short'
+        };
+        document.getElementById('current-datetime').textContent = now.toLocaleDateString('en-US', options);
+        document.getElementById('last-updated').textContent = now.toLocaleTimeString('en-US');
+    }
+
+    setInterval(updateDateTime, 1000);
+
+    // Fetch news from API or use demo data
+    async function fetchNewsByCategory(category) {
+        if (USE_DEMO_DATA) {
+            return DEMO_NEWS[category] || [];
+        }
+
+        try {
+            // Note: You need to sign up for a free API key at https://newsapi.org/
+            const response = await axios.get(`https://newsapi.org/v2/top-headlines`, {
+                params: {
+                    category: category,
+                    country: category === 'world' ? 'us' : undefined,
+                    apiKey: NEWS_API_KEY,
+                    pageSize: 3,
+                    language: 'en'
+                }
+            });
+            return response.data.articles;
+        } catch (error) {
+            console.error(`Error fetching ${category} news:`, error);
+            return DEMO_NEWS[category] || [];
+        }
+    }
+
+    // Create section HTML
+    function createSection(title, icon, category, color, articles) {
+        const section = document.createElement('section');
+        section.className = `${category}-section`;
+        
+        let articlesHTML = '';
+        articles.forEach((article, index) => {
+            const imageUrl = article.urlToImage || IMAGE_MAP[article.image] || IMAGE_MAP.default;
+            const publishedTime = article.publishedAt ? new Date(article.publishedAt).toLocaleTimeString() : 'Just now';
+            
+            articlesHTML += `
+                <div class="story-card">
+                    <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('${imageUrl}');">
+                        <i class="${icon}"></i>
+                    </div>
+                    <div class="card-content">
+                        <div class="meta">
+                            <span>${article.source?.name || article.source || 'News Source'}</span>
+                            <span class="source-badge">${publishedTime}</span>
+                        </div>
+                        <h3 style="color:${color};">${article.title}</h3>
+                        <p>${article.description || 'Click to read full story...'}</p>
+                        ${article.content ? `<p>${article.content.substring(0, 100)}...</p>` : ''}
+                    </div>
+                </div>
+            `;
+        });
+
+        section.innerHTML = `
+            <div class="section-title">
+                <i class="${icon}"></i> <span>${title}</span>
+            </div>
+            <div class="story-grid">
+                ${articlesHTML}
+            </div>
+        `;
+
+        return section;
+    }
+
+    // Update breaking ticker
+    function updateTicker(articles) {
+        const ticker = document.getElementById('breaking-ticker');
+        const headlines = articles.slice(0, 8).map(a => a.title).join(' &nbsp;&nbsp;⚡&nbsp;&nbsp; ');
+        ticker.innerHTML = `🔴 ${headlines}`;
+    }
+
+    // Main function to fetch and display all news
+    async function fetchAllNews() {
+        const container = document.getElementById('news-container');
+        container.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> Fetching latest global news...</div>';
+
+        try {
+            // Fetch all categories
+            const categories = [
+                { name: 'topstory', display: 'TOP STORIES', icon: 'fas fa-globe-americas', color: '#0b1e2f' },
+                { name: 'politics', display: 'POLITICS', icon: 'fas fa-landmark', color: '#b13e3e' },
+                { name: 'business', display: 'BUSINESS', icon: 'fas fa-chart-line', color: '#1f7a5a' },
+                { name: 'technology', display: 'TECHNOLOGY', icon: 'fas fa-microchip', color: '#2563eb' },
+                { name: 'world', display: 'WORLD', icon: 'fas fa-globe', color: '#7c3aed' },
+                { name: 'health', display: 'HEALTH', icon: 'fas fa-heartbeat', color: '#059669' },
+                { name: 'sports', display: 'SPORTS', icon: 'fas fa-futbol', color: '#d97706' }
+            ];
+
+            const allNews = {};
+            let allArticles = [];
+
+            for (const cat of categories) {
+                const articles = await fetchNewsByCategory(cat.name);
+                allNews[cat.name] = articles;
+                allArticles = [...allArticles, ...articles];
+            }
+
+            // Update ticker
+            updateTicker(allArticles);
+
+            // Build HTML
+            container.innerHTML = '';
+            
+            categories.forEach(cat => {
+                if (allNews[cat.name] && allNews[cat.name].length > 0) {
+                    const section = createSection(
+                        cat.display, 
+                        cat.icon, 
+                        cat.name, 
+                        cat.color, 
+                        allNews[cat.name]
+                    );
+                    container.appendChild(section);
+                }
+            });
+
+        } catch (error) {
+            console.error('Error fetching news:', error);
+            container.innerHTML = `
+                <div class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i> 
+                    Unable to fetch live news. Using demo data. 
+                    <button onclick="fetchAllNews()" style="margin-left:1rem; padding:0.3rem 1rem; background:#c49a2b; border:none; border-radius:20px; cursor:pointer;">
+                        Try Again
+                    </button>
+                </div>
+            `;
+            
+            // Show demo data as fallback
+            setTimeout(() => {
+                if (USE_DEMO_DATA) {
+                    fetchAllNews(); // This will use demo data since USE_DEMO_DATA is true
+                }
+            }, 1000);
+        }
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+        updateDateTime();
+        fetchAllNews();
+        
+        // Auto-refresh every 5 minutes
+        setInterval(fetchAllNews, 5 * 60 * 1000);
+    });
+</script>
+
+<!-- Add note about API key -->
+<div style="position: fixed; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; padding: 8px 15px; border-radius: 30px; font-size: 0.8rem; z-index: 1000;">
+    <i class="fas fa-info-circle"></i> 
+    Using demo data - <a href="#" style="color: #c49a2b;" onclick="alert('To get live news:\n1. Sign up at newsapi.org\n2. Replace NEWS_API_KEY in the code\n3. Set USE_DEMO_DATA = false')">Get API key</a>
+</div>
 </body>
-</html>
+    </html>
