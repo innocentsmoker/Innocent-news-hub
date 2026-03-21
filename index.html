@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>AFRICAN NEWS HUB · INNOCENT TECH | Kenyan Vibes</title>
+    <title>AFRIKA VIZION · Immersive News Hub | The Pulse</title>
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Axios -->
@@ -16,573 +16,577 @@
         }
 
         body {
-            font-family: 'Poppins', 'Inter', 'Segoe UI', system-ui, sans-serif;
-            line-height: 1.6;
-            padding: 1.5rem;
-            color: #f0f3fa;
-            position: relative;
+            font-family: 'Inter', 'Segoe UI', 'Poppins', system-ui, sans-serif;
+            background: radial-gradient(circle at 10% 20%, #03050f, #010101);
+            color: #eef5ff;
+            line-height: 1.5;
             min-height: 100vh;
-            background: radial-gradient(circle at 10% 20%, #0a0f2a, #03050b);
+            position: relative;
             overflow-x: hidden;
         }
 
-        /* Dynamic Kenyan celebration overlay */
+        /* abstract digital african pattern overlay */
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?w=1600&q=80');
-            background-size: cover;
-            background-position: center 20%;
-            opacity: 0.2;
+            inset: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" opacity="0.08"><path fill="none" stroke="%23f0b27a" stroke-width="1.5" d="M200 100 L600 200 L700 500 L400 700 L100 500 Z M300 250 L500 320 L550 480 L350 550 L150 400 Z"/><circle cx="400" cy="400" r="80" stroke="%23f0b27a" fill="none"/><path d="M400 200 L420 280 L500 280 L440 330 L460 410 L400 370 L340 410 L360 330 L300 280 L380 280 Z" fill="%23f0b27a20" stroke="%23f0b27a"/></svg>');
+            background-repeat: repeat;
+            background-size: 180px;
+            pointer-events: none;
             z-index: 0;
-            animation: slowDrift 24s ease-in-out infinite alternate;
-            pointer-events: none;
         }
 
-        @keyframes slowDrift {
-            0% { transform: scale(1); opacity: 0.2; }
-            100% { transform: scale(1.05); opacity: 0.3; }
-        }
-
-        /* Running Kenyan crowd animation */
-        .celebration-crowd {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 110px;
-            pointer-events: none;
-            z-index: 5;
-            overflow: hidden;
-        }
-
-        .runner-flag {
-            position: absolute;
-            bottom: 15px;
-            font-size: 2.4rem;
-            white-space: nowrap;
-            animation: runKenya 14s linear infinite;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
-            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.2), transparent);
-            border-radius: 50px;
-            padding: 0 10px;
-        }
-
-        @keyframes runKenya {
-            0% { transform: translateX(-120px); opacity: 0.9; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { transform: translateX(100vw); opacity: 0; }
+        /* glassmorphism core */
+        .glass-panel {
+            background: rgba(12, 20, 30, 0.65);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(240, 178, 122, 0.35);
+            border-radius: 2rem;
         }
 
         .container {
             max-width: 1500px;
-            margin: 0 auto;
-            background: rgba(8, 12, 25, 0.82);
-            backdrop-filter: blur(12px);
-            border-radius: 48px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(196,154,43,0.3);
+            margin: 2rem auto;
+            padding: 0 1.5rem;
             position: relative;
-            z-index: 20;
-            overflow: hidden;
-            transition: all 0.3s;
+            z-index: 10;
         }
 
-        .live-pulse {
-            display: inline-block;
-            background: #e11d48;
-            color: white;
-            padding: 0.2rem 1rem;
-            border-radius: 40px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            animation: pulseRed 1.2s infinite;
+        /* header hero */
+        .hero-header {
+            background: linear-gradient(105deg, rgba(0, 0, 0, 0.65) 0%, rgba(20, 30, 45, 0.7) 100%);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(240, 178, 122, 0.5);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.4);
         }
 
-        @keyframes pulseRed {
-            0% { box-shadow: 0 0 0 0 #e11d48aa; }
-            70% { box-shadow: 0 0 0 8px #e11d4800; }
-            100% { box-shadow: 0 0 0 0 transparent; }
-        }
-
-        .header {
-            background: linear-gradient(135deg, #0b1120, #0a0f1c);
-            padding: 1.4rem 2rem;
-            border-bottom: 3px solid #f5b042;
-        }
-
-        .brand-flex {
+        .brand-flow {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 1.2rem;
         }
 
-        .africa-title {
+        .logo-area {
             display: flex;
             align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
+            gap: 14px;
         }
-        .africa-title h1 {
-            font-size: 1.8rem;
+
+        .pulse-logo {
+            font-size: 2.2rem;
+            animation: subtleGlow 3s infinite alternate;
+        }
+
+        @keyframes subtleGlow {
+            0% { text-shadow: 0 0 2px #f0b27a; }
+            100% { text-shadow: 0 0 12px #ffcd94; }
+        }
+
+        .title-gold {
+            font-size: 1.9rem;
             font-weight: 800;
-            background: linear-gradient(120deg, #ffcd7e, #f5b042);
+            background: linear-gradient(130deg, #fff2e0, #f0b27a);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: -0.5px;
-        }
-        .kenya-flag {
-            font-size: 2rem;
-            filter: drop-shadow(0 2px 5px gold);
+            letter-spacing: -0.02em;
         }
 
-        .rotating-dev {
+        .rotating-masterpiece {
             display: flex;
             align-items: center;
             gap: 12px;
-            background: rgba(0,0,0,0.55);
-            padding: 0.5rem 1.2rem;
-            border-radius: 80px;
-            border: 1px solid #f5b042;
-            backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.5);
+            padding: 0.5rem 1.4rem;
+            border-radius: 100px;
+            border: 1px solid #f0b27a;
         }
-        .globe-spin {
-            animation: spinSlow 5s infinite linear;
-            font-size: 1.8rem;
-            color: #f5b042;
+
+        .spin-icon {
+            animation: spinGlobe 6s infinite linear;
+            font-size: 1.7rem;
+            color: #f0b27a;
         }
-        @keyframes spinSlow {
+
+        @keyframes spinGlobe {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        .dev-name {
-            font-weight: 800;
-            font-size: 1.1rem;
-            background: linear-gradient(135deg, #ffe6b3, #f5b042);
+
+        .studio-name {
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-size: 1rem;
+            background: linear-gradient(135deg, #f5e2c1, #f0b27a);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
 
-        .date-kenya {
-            background: #f5b04220;
-            padding: 0.3rem 1.2rem;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            margin-top: 0.6rem;
-            display: inline-block;
-            border: 1px solid #f5b04260;
+        .date-ticker {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
-        .ticker-bar {
-            background: #0f1424dd;
-            padding: 0.7rem 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 1rem;
-            border-bottom: 1px solid #f5b04240;
-        }
-        .ticker-label {
-            background: #f5b042;
-            color: #0a0f1a;
-            padding: 0.2rem 1rem;
-            border-radius: 30px;
-            font-weight: bold;
-        }
-        .refresh-btn {
-            background: #f5b042;
-            color: #0f1222;
+        .time-chip {
+            background: rgba(240, 178, 122, 0.15);
             padding: 0.3rem 1rem;
             border-radius: 40px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.2s;
-        }
-        .refresh-btn:hover {
-            background: #ffcd7e;
-            transform: scale(0.96);
+            font-size: 0.85rem;
+            border: 1px solid rgba(240, 178, 122, 0.4);
         }
 
-        section {
-            padding: 1.8rem 2rem;
-            border-bottom: 1px solid rgba(245,176,66,0.2);
-        }
-        .section-title {
+        .breaking-bar {
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            border-radius: 60px;
+            padding: 0.6rem 1.5rem;
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: #ffecb3;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid #f0b27a;
         }
-        .news-video-layout {
+
+        .flash {
+            background: #f0b27a;
+            color: #0a0c15;
+            padding: 0.2rem 1rem;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 0.8rem;
+        }
+
+        .refresh-pulse {
+            background: rgba(240, 178, 122, 0.2);
+            padding: 0.3rem 1rem;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+
+        .refresh-pulse:hover {
+            background: #f0b27a;
+            color: #0a0c15;
+        }
+
+        /* news section style */
+        .news-grid-modern {
             display: grid;
-            grid-template-columns: 1fr 340px;
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.8rem;
+            margin-top: 1rem;
         }
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-            gap: 1.5rem;
-        }
-        .news-card {
-            background: #1a1f2ee6;
-            border-radius: 28px;
+
+        .article-card {
+            background: rgba(15, 25, 40, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 1.8rem;
             overflow: hidden;
-            border: 1px solid #f5b04240;
-            transition: all 0.25s ease;
-            backdrop-filter: blur(4px);
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid rgba(240, 178, 122, 0.3);
         }
-        .news-card:hover {
-            border-color: #f5b042;
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px -10px black;
+
+        .article-card:hover {
+            transform: translateY(-6px);
+            border-color: #f0b27a;
+            box-shadow: 0 20px 30px -15px rgba(0,0,0,0.6);
         }
-        .card-media {
-            height: 170px;
+
+        .card-img-modern {
+            height: 180px;
             background-size: cover;
             background-position: center;
             position: relative;
         }
-        .card-content {
-            padding: 1.2rem;
-        }
-        .news-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: #ffefcf;
-        }
-        .news-meta {
+
+        .card-category {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            background: rgba(0,0,0,0.7);
+            padding: 4px 12px;
+            border-radius: 30px;
             font-size: 0.7rem;
-            color: #b9c3e0;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+        }
+
+        .card-text {
+            padding: 1.3rem;
+        }
+
+        .card-text h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff0e0;
+        }
+
+        .meta-light {
+            font-size: 0.7rem;
+            color: #cbd5e6;
             margin-bottom: 0.6rem;
+            display: flex;
+            gap: 12px;
         }
-        .news-desc {
+
+        .desc-light {
             font-size: 0.85rem;
-            color: #cdd9ff;
+            color: #ccd9f0;
+            line-height: 1.4;
         }
-        .video-panel {
-            background: #0e1322ee;
-            border-radius: 28px;
-            padding: 1rem;
-            border: 1px solid #f5b04280;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+
+        /* video spotlight section */
+        .video-spotlight {
+            margin: 2rem 0;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 2rem;
+            padding: 1.4rem;
+            border: 1px solid rgba(240, 178, 122, 0.5);
         }
-        .video-wrapper {
+
+        .video-flex {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .feature-embed {
             position: relative;
             padding-bottom: 56%;
             height: 0;
-            border-radius: 20px;
+            border-radius: 1.5rem;
             overflow: hidden;
-            margin: 0.8rem 0;
         }
-        .video-wrapper iframe {
+
+        .feature-embed iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border-radius: 20px;
+            border-radius: 1.2rem;
         }
 
-        /* SPOTIFY PREMIUM SONG EMBED */
-        .spotify-song-highlight {
-            background: linear-gradient(145deg, #121826, #0a0f1a);
-            margin: 0 1.2rem 1.5rem 1.2rem;
-            border-radius: 32px;
+        .vibe-card {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 1.5rem;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        /* music widget */
+        .music-vortex {
+            background: linear-gradient(115deg, #0b0f1c, #03050c);
+            border-radius: 2rem;
+            margin: 1.8rem 0;
             padding: 1rem 1.5rem;
-            border: 1px solid #f5b042;
-            box-shadow: 0 12px 25px rgba(0,0,0,0.5);
-        }
-        .song-header {
+            border: 1px solid #f0b27a;
             display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 1rem;
             flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
         }
-        .spotify-badge {
+
+        .spotify-embed-custom {
+            flex: 2;
+            min-width: 240px;
+        }
+
+        .music-badge {
             background: #1DB954;
             padding: 0.3rem 1rem;
             border-radius: 40px;
-            font-size: 0.8rem;
             font-weight: bold;
-        }
-        iframe {
-            border-radius: 20px;
+            font-size: 0.8rem;
         }
 
-        .footer {
-            background: #05080f;
-            padding: 1.5rem;
+        .footer-elegant {
             text-align: center;
+            margin-top: 2rem;
+            padding: 1.8rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 1.8rem;
             font-size: 0.8rem;
-            border-top: 1px solid #f5b04240;
+            border-top: 1px solid #f0b27a30;
         }
-        .developer-credit {
-            color: #f5b042;
-            font-weight: bold;
-            margin-top: 8px;
+
+        @media (max-width: 800px) {
+            .video-flex { grid-template-columns: 1fr; }
+            .container { padding: 0 1rem; }
+            .title-gold { font-size: 1.4rem; }
         }
-        @media (max-width: 880px) {
-            .news-video-layout { grid-template-columns: 1fr; }
-            .video-panel { order: 2; margin-top: 1rem; }
-            section { padding: 1rem; }
-        }
-        .loading-spinner {
-            text-align: center;
+
+        .loading-wave {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
             padding: 3rem;
         }
     </style>
 </head>
 <body>
 
-<!-- Celebration crowd running with Kenyan flags -->
-<div class="celebration-crowd">
-    <div class="runner-flag" style="animation-duration: 10s; bottom: 10px;">🇰🇪🏃‍♂️🔥 <i class="fas fa-flag-checkered"></i></div>
-    <div class="runner-flag" style="animation-duration: 13s; animation-delay: 2s; bottom: 40px;">🏃‍♀️🇰🇪✨ <i class="fas fa-drumstick-bite"></i></div>
-    <div class="runner-flag" style="animation-duration: 9s; animation-delay: 5s; bottom: 65px;">🎉🇰🇪🏃 <i class="fas fa-music"></i></div>
-    <div class="runner-flag" style="animation-duration: 15s; animation-delay: 1s; bottom: 25px;"><i class="fas fa-fist-raised"></i> KENYA 🇰🇪</div>
-</div>
-
 <div class="container">
-    <div class="header">
-        <div class="brand-flex">
-            <div class="africa-title">
-                <i class="fas fa-flag-checkered kenya-flag" style="color: #006B3F;"></i>
-                <h1>AFRICAN NEWS SECTION</h1>
-                <i class="fas fa-flag kenya-flag" style="color: #B22234;"></i>
-                <span class="live-pulse"><i class="fas fa-circle" style="font-size: 0.5rem;"></i> LIVE</span>
+    <!-- header visionary -->
+    <div class="hero-header">
+        <div class="brand-flow">
+            <div class="logo-area">
+                <i class="fas fa-compass pulse-logo"></i>
+                <span class="title-gold">AFRIKA VIZION</span>
+                <span class="time-chip" style="margin-left: 8px;"><i class="fas fa-circle" style="color: #f0b27a; font-size: 0.6rem;"></i> LIVE PULSE</span>
             </div>
-            <div class="rotating-dev">
-                <i class="fas fa-globe-africa globe-spin"></i>
-                <span class="dev-name">INNOCENT TECH</span>
-                <i class="fas fa-crown" style="color: #f5b042;"></i>
+            <div class="rotating-masterpiece">
+                <i class="fas fa-globe-asia spin-icon"></i>
+                <span class="studio-name">✦ NEXUS STUDIO ✦</span>
+                <i class="fas fa-waveform" style="color: #f0b27a;"></i>
             </div>
         </div>
-        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-top: 12px;">
-            <div class="date-kenya"><i class="far fa-calendar-alt"></i> <span id="currentDate"></span> · NAIROBI 🇰🇪</div>
-            <div class="date-kenya"><i class="far fa-clock"></i> <span id="liveClock"></span> EAT</div>
+        <div class="date-ticker">
+            <div class="time-chip"><i class="far fa-calendar-alt"></i> <span id="currentDateUI"></span> · NAIROBI / DAKAR</div>
+            <div class="time-chip"><i class="far fa-clock"></i> <span id="liveTimeUI"></span> EAT</div>
         </div>
     </div>
 
-    <div class="ticker-bar">
-        <span class="ticker-label"><i class="fas fa-bolt"></i> FLASH</span>
-        <marquee behavior="scroll" direction="left" scrollamount="5" id="breakingFeed">🔥 Loading Pan-African headlines...</marquee>
-        <div class="refresh-btn" onclick="fetchAllNews()"><i class="fas fa-sync-alt"></i> Sync News</div>
+    <!-- breaking news strip -->
+    <div class="breaking-bar">
+        <span class="flash"><i class="fas fa-broadcast-tower"></i> VIZION ALERT</span>
+        <marquee behavior="scroll" direction="left" scrollamount="4" id="globalTicker" style="flex:1; font-weight: 500;">🌍 loading the continent's rhythm ...</marquee>
+        <div class="refresh-pulse" onclick="refreshAllContent()"><i class="fas fa-sync-alt"></i> SYNC</div>
     </div>
 
-    <div id="newsDynamicContainer">
-        <div class="loading-spinner"><i class="fas fa-spinner fa-pulse fa-2x"></i> <p>Fetching African updates + videos...</p></div>
+    <!-- main news grid injected -->
+    <div id="dynamicNewsGrid" class="news-grid-modern">
+        <div class="loading-wave"><i class="fas fa-spinner fa-pulse fa-2x"></i> <span>summoning stories...</span></div>
     </div>
 
-    <!-- 🔥 SPOTIFY SONG: WAKADINALI / CENTRAL CEE VIBE - using actual track from link -->
-    <div class="spotify-song-highlight">
-        <div class="song-header">
-            <i class="fab fa-spotify" style="font-size: 2rem; color: #1DB954;"></i>
-            <span class="spotify-badge"><i class="fas fa-headphones"></i> EXCLUSIVE TRACK</span>
-            <span style="font-weight: 300;">🔥 NOW PLAYING 🔥</span>
+    <!-- video spotlight section: immersive narrative -->
+    <div class="video-spotlight">
+        <div class="video-flex">
+            <div class="feature-embed">
+                <iframe id="featureVideo" src="https://www.youtube.com/embed/7HhC1NjxVJg?autoplay=0&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="vibe-card">
+                <i class="fas fa-film" style="font-size: 2rem; color:#f0b27a;"></i>
+                <h3 style="margin: 0.5rem 0;">The African Renaissance</h3>
+                <p style="font-size: 0.85rem;">Visual storytelling · innovation · culture</p>
+                <div style="margin-top: 10px;"><i class="fas fa-head-side-vr"></i> weekly docu-series</div>
+            </div>
         </div>
-        <iframe src="https://open.spotify.com/embed/track/73ZImg0oR84KSCpsOOLo3r?utm_source=generator&theme=0" width="100%" height="80" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 20px;"></iframe>
-        <p style="font-size: 0.7rem; margin-top: 10px; text-align: center;"><i class="fas fa-volume-up"></i> Central Cee x Kenyan Wave · Banger of the month</p>
     </div>
 
-    <div class="footer">
-        <p><i class="fas fa-globe"></i> AFRICAN NEWS SECTION · Unbiased reporting from the motherland</p>
-        <div class="developer-credit">
-            <i class="fas fa-laptop-code"></i> Built with passion by <strong>INNOCENT TECH</strong> · The future of news
+    <!-- premium music experience: embedded spotify track (given track) -->
+    <div class="music-vortex">
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <i class="fab fa-spotify" style="font-size: 2rem; color:#1DB954;"></i>
+            <span class="music-badge"><i class="fas fa-headphones"></i> SPOTIFY WAVE</span>
+            <span style="font-size: 0.8rem;">central cee · global rhythm</span>
         </div>
-        <p class="update-time">Last refresh: <span id="lastSyncTime">Just now</span></p>
+        <div class="spotify-embed-custom">
+            <iframe src="https://open.spotify.com/embed/track/73ZImg0oR84KSCpsOOLo3r?utm_source=generator&theme=0" width="100%" height="80" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius: 20px;"></iframe>
+        </div>
+    </div>
+
+    <div class="footer-elegant">
+        <p><i class="fas fa-eye"></i> AFRIKA VIZION · Curating the continent's truth & tomorrow</p>
+        <p style="margin-top: 8px; font-size: 0.7rem;">designed by <strong style="color:#f0b27a;">✦ NEXUS CREATIVE LAB ✦</strong> · real-time intelligence</p>
+        <span class="time-chip" style="margin-top: 8px; display: inline-block;">last sync: <span id="syncStamp">just now</span></span>
     </div>
 </div>
 
 <script>
     // ============================================================
-    // INNOCENT TECH NEWS HUB - premium edition with Spotify track
-    // API Key integrated
+    // Nexus News Engine · API integration (NewsAPI)
+    // fresh, minimal, immersive design – no legacy branding
     // ============================================================
-    const NEWS_API_KEY = 'c59e80dea3fb48b7a39ab2e8b036c0f5';
+    const API_KEY = 'c59e80dea3fb48b7a39ab2e8b036c0f5';
     
-    // HIGH QUALITY VIDEO LINKS (working embed recaps)
-    const VID_MAP = {
-        topstory: 'https://www.youtube.com/embed/l1YmS_VDxFQ?autoplay=0&rel=0',
-        politics: 'https://www.youtube.com/embed/UWx9HoSJtEo?autoplay=0&rel=0',
-        business: 'https://www.youtube.com/embed/hu4P_8ul2Jo?autoplay=0&rel=0',
-        technology: 'https://www.youtube.com/embed/6M6vPxEfUfw?autoplay=0&rel=0',
-        world: 'https://www.youtube.com/embed/6lQHr4N8b3g?autoplay=0&rel=0',
-        health: 'https://www.youtube.com/embed/mkUZ_2fCbfY?autoplay=0&rel=0',
-        sports: 'https://www.youtube.com/embed/SLzBW-dh6nQ?autoplay=0&rel=0'
+    // category icons mapping for dynamic display
+    const categoryMeta = {
+        general: { icon: 'fas fa-globe', label: 'Panorama' },
+        politics: { icon: 'fas fa-gavel', label: 'Governance' },
+        business: { icon: 'fas fa-chart-simple', label: 'Economy' },
+        technology: { icon: 'fas fa-microchip', label: 'Innovation' },
+        sports: { icon: 'fas fa-futbol', label: 'Arena' },
+        health: { icon: 'fas fa-heart-pulse', label: 'Wellness' },
+        science: { icon: 'fas fa-flask', label: 'Science' }
     };
     
-    const FALLBACK_IMG = {
-        default: 'https://images.unsplash.com/photo-1584450150059-b1fe6a69c9c3?w=600',
-        politics: 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=600',
-        business: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=600',
-        technology: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600',
-        sports: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600'
-    };
+    // fallback images for visual depth
+    const vibeImages = [
+        'https://images.unsplash.com/photo-1534432586043-ead5b99229fb?w=600',
+        'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=600',
+        'https://images.unsplash.com/photo-1585155770447-2f66e2a397b5?w=600',
+        'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600',
+        'https://images.unsplash.com/photo-1541873676-a18131494184?w=600',
+        'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600'
+    ];
     
-    // Date & Time update
-    function updateKenyaTime() {
+    // dynamic date/time update (east africa)
+    function updateChronos() {
         const now = new Date();
-        const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
-        document.getElementById('currentDate').innerHTML = now.toLocaleDateString('en-KE', optionsDate);
-        document.getElementById('liveClock').innerHTML = now.toLocaleTimeString('en-KE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        document.getElementById('lastSyncTime').innerHTML = now.toLocaleTimeString();
+        const dateOpt = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('currentDateUI').innerText = now.toLocaleDateString('en-US', dateOpt);
+        document.getElementById('liveTimeUI').innerText = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        document.getElementById('syncStamp').innerText = now.toLocaleTimeString();
     }
-    setInterval(updateKenyaTime, 1000);
-    updateKenyaTime();
+    setInterval(updateChronos, 1000);
+    updateChronos();
     
-    // fetch category news
-    async function getNewsByCategory(cat, country = 'us') {
+    // fetch headlines from newsapi
+    async function fetchVizionNews(categorySlug = 'general', countryCode = 'us') {
         try {
-            let apiCat = (cat === 'topstory' || cat === 'world') ? 'general' : cat;
-            const resp = await axios.get('https://newsapi.org/v2/top-headlines', {
-                params: {
-                    category: apiCat,
-                    country: country,
-                    apiKey: NEWS_API_KEY,
-                    pageSize: 3,
-                    language: 'en'
-                },
-                timeout: 10000
-            });
-            if (resp.data?.articles) {
-                return resp.data.articles.filter(a => a.title && a.title !== '[Removed]');
+            const endpoint = 'https://newsapi.org/v2/top-headlines';
+            const params = {
+                category: categorySlug,
+                country: countryCode,
+                apiKey: API_KEY,
+                pageSize: 6,
+                language: 'en'
+            };
+            const response = await axios.get(endpoint, { params, timeout: 9000 });
+            if (response.data?.articles) {
+                return response.data.articles.filter(art => art.title && art.title !== '[Removed]');
             }
             return [];
         } catch (err) {
-            console.warn(`err ${cat}`, err.message);
+            console.warn(`fetch error for ${categorySlug}`, err.message);
             return [];
         }
     }
     
-    // Build section with video + news cards
-    function buildSection(catKey, displayTitle, iconClass, articles, videoUrl) {
-        const sectionDiv = document.createElement('section');
-        let cardsHtml = '';
-        if (articles.length) {
-            articles.forEach(art => {
-                let img = art.urlToImage;
-                if (!img || img === 'null') img = FALLBACK_IMG[catKey] || FALLBACK_IMG.default;
-                const timeAgo = art.publishedAt ? new Date(art.publishedAt).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) : 'now';
-                const srcName = art.source?.name || 'African Wire';
-                const titleShort = art.title?.substring(0, 90) || 'Untold story';
-                const descBrief = art.description?.substring(0, 110) || 'Tap to read full coverage';
-                cardsHtml += `
-                    <div class="news-card">
-                        <div class="card-media" style="background-image: linear-gradient(0deg, #000000aa, #00000055), url('${img}');">
-                            <i class="${iconClass}" style="position:absolute; bottom:12px; left:12px; background:#000000aa; padding:5px 12px; border-radius:30px;"></i>
-                        </div>
-                        <div class="card-content">
-                            <div class="news-meta">${srcName} · ${timeAgo}</div>
-                            <h3>${titleShort}</h3>
-                            <p class="news-desc">${descBrief}</p>
-                            ${art.url ? `<a href="${art.url}" target="_blank" style="color:#f5b042; font-size:0.7rem; display:inline-block; margin-top:8px;">Read more →</a>` : ''}
-                        </div>
-                    </div>
-                `;
-            });
-        } else {
-            cardsHtml = `<div style="grid-column:1/-1; background:#1f253a; border-radius:28px; padding:2rem; text-align:center;">✨ Fresh stories loading — pull refresh ✨</div>`;
+    // generate card HTML
+    function buildCard(article, index, categoryIcon, categoryLabel) {
+        let imageUrl = article.urlToImage;
+        if (!imageUrl || imageUrl === 'null') {
+            imageUrl = vibeImages[index % vibeImages.length];
         }
+        const pub = article.publishedAt ? new Date(article.publishedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'recent';
+        const source = article.source?.name || 'Nexus Wire';
+        const title = article.title?.substring(0, 88) || 'Voices rising';
+        const description = article.description?.substring(0, 110) || 'Explore the full story on our platform.';
         
-        sectionDiv.innerHTML = `
-            <div class="section-title">
-                <i class="${iconClass}"></i> <span>${displayTitle}</span>
-            </div>
-            <div class="news-video-layout">
-                <div class="news-grid">
-                    ${cardsHtml}
+        return `
+            <div class="article-card">
+                <div class="card-img-modern" style="background-image: linear-gradient(0deg, #000000aa, #00000066), url('${imageUrl}');">
+                    <span class="card-category"><i class="${categoryIcon}"></i> ${categoryLabel}</span>
                 </div>
-                <div class="video-panel">
-                    <h4 style="color:#f5b042; display:flex; gap:8px;"><i class="fas fa-video"></i> ${displayTitle} · Live Recap</h4>
-                    <div class="video-wrapper">
-                        <iframe src="${videoUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-                    </div>
-                    <p style="font-size:0.7rem; margin-top: 6px;"><i class="fas fa-tv"></i> Top highlights & analysis</p>
+                <div class="card-text">
+                    <div class="meta-light"><span><i class="far fa-newspaper"></i> ${source}</span> <span><i class="far fa-clock"></i> ${pub}</span></div>
+                    <h3>${title}</h3>
+                    <p class="desc-light">${description}</p>
+                    ${article.url ? `<a href="${article.url}" target="_blank" style="display: inline-block; margin-top: 10px; font-size:0.7rem; color:#f0b27a; font-weight:600;">read full story <i class="fas fa-arrow-right"></i></a>` : ''}
                 </div>
             </div>
         `;
-        return sectionDiv;
     }
     
-    function updateBreakingTicker(allArticles) {
-        const tickerMarquee = document.getElementById('breakingFeed');
-        if (!allArticles.length) {
-            tickerMarquee.innerHTML = '🇰🇪 INNOCENT TECH NEWS: Kenya · Africa · World | Stay connected 🔥';
-            return;
-        }
-        const titles = allArticles.slice(0, 12).map(a => a.title).join('   ⚡   ');
-        tickerMarquee.innerHTML = `🔴 ${titles}`;
-    }
-    
-    // Main fetch and render
-    async function fetchAllNews() {
-        const container = document.getElementById('newsDynamicContainer');
-        container.innerHTML = '<div class="loading-spinner"><i class="fas fa-spinner fa-pulse fa-2x"></i><p>Loading African pulse & videos...</p></div>';
+    // combine multiple categories into a single rich grid
+    async function renderImmersiveGrid() {
+        const container = document.getElementById('dynamicNewsGrid');
+        container.innerHTML = '<div class="loading-wave"><i class="fas fa-spinner fa-pulse fa-2x"></i> <span>curating stories...</span></div>';
         
         try {
-            const categories = [
-                { key: 'topstory', display: '🔥 TOP STORIES (Africa)', icon: 'fas fa-fire', country: 'us' },
-                { key: 'politics', display: '🏛️ POLITICS & GOVERNANCE', icon: 'fas fa-landmark', country: 'us' },
-                { key: 'business', display: '📊 BUSINESS & MARKETS', icon: 'fas fa-chart-line', country: 'us' },
-                { key: 'technology', display: '💻 TECH & AI', icon: 'fas fa-microchip', country: 'us' },
-                { key: 'world', display: '🌍 WORLD AFFAIRS', icon: 'fas fa-globe', country: 'gb' },
-                { key: 'health', display: '❤️ HEALTH & WELLNESS', icon: 'fas fa-heartbeat', country: 'us' },
-                { key: 'sports', display: '⚽ SPORTS ARENA', icon: 'fas fa-futbol', country: 'us' }
+            // fetch from 4 diverse categories to create a vibrant mix
+            const categoriesToFetch = [
+                { slug: 'general', country: 'us', label: 'Global', icon: 'fas fa-globe' },
+                { slug: 'technology', country: 'us', label: 'Tech', icon: 'fas fa-microchip' },
+                { slug: 'business', country: 'us', label: 'Markets', icon: 'fas fa-chart-line' },
+                { slug: 'sports', country: 'us', label: 'Sports', icon: 'fas fa-futbol' }
             ];
             
-            const results = {};
-            let allHeadlineArticles = [];
+            let allCardsHTML = [];
+            let tickerHeadlines = [];
             
-            const fetchOps = categories.map(async cat => {
-                let articles = [];
-                try {
-                    let apiCat = (cat.key === 'topstory' || cat.key === 'world') ? 'general' : cat.key;
-                    const resp = await axios.get('https://newsapi.org/v2/top-headlines', {
-                        params: { category: apiCat, country: cat.country, apiKey: NEWS_API_KEY, pageSize: 3, language: 'en' },
-                        timeout: 9000
+            for (let cat of categoriesToFetch) {
+                const articles = await fetchVizionNews(cat.slug, cat.country);
+                if (articles.length) {
+                    articles.slice(0, 3).forEach((art, idx) => {
+                        const cardHtml = buildCard(art, idx, cat.icon, cat.label);
+                        allCardsHTML.push(cardHtml);
+                        if (art.title) tickerHeadlines.push(art.title);
                     });
-                    if (resp.data?.articles) articles = resp.data.articles.filter(a => a.title && a.title !== '[Removed]');
-                } catch(e) { articles = []; }
-                results[cat.key] = articles;
-                allHeadlineArticles.push(...articles);
-            });
-            await Promise.all(fetchOps);
-            
-            updateBreakingTicker(allHeadlineArticles);
-            container.innerHTML = '';
-            
-            for (let cat of categories) {
-                const articlesData = results[cat.key] || [];
-                const videoLink = VID_MAP[cat.key] || VID_MAP.topstory;
-                const sectionEl = buildSection(cat.key, cat.display, cat.icon, articlesData, videoLink);
-                container.appendChild(sectionEl);
+                } else {
+                    // fallback creative snippet if API returns empty
+                    allCardsHTML.push(`
+                        <div class="article-card" style="background:rgba(0,0,0,0.5);">
+                            <div class="card-text"><h3>✦ Fresh perspectives incoming</h3><p>Stay tuned — the continent is moving.</p></div>
+                        </div>
+                    `);
+                }
             }
             
-            // tiny extra: update sync time
-            document.getElementById('lastSyncTime').innerHTML = new Date().toLocaleTimeString();
-        } catch (globalErr) {
-            console.error(globalErr);
-            container.innerHTML = `<div style="background:#7f1a1a; margin:2rem; padding:2rem; border-radius: 32px; text-align:center;">
-                <i class="fas fa-satellite-dish fa-2x"></i><br/>Connection glitch — tap <button onclick="fetchAllNews()" style="background:#f5b042; border:none; padding:0.5rem 1.2rem; border-radius:30px;">RETRY</button></div>`;
+            // if still no cards, add inspiring placeholder
+            if (allCardsHTML.length === 0) {
+                allCardsHTML.push(`<div class="article-card"><div class="card-text"><h3>Voices of the new age</h3><p>We're amplifying African narratives. Pull refresh to reload.</p></div></div>`);
+            }
+            
+            // shuffle for organic feel
+            allCardsHTML = allCardsHTML.sort(() => Math.random() - 0.5);
+            container.innerHTML = allCardsHTML.join('');
+            
+            // update marquee ticker
+            const tickerElem = document.getElementById('globalTicker');
+            if (tickerHeadlines.length) {
+                const uniqueHeadlines = [...new Map(tickerHeadlines.map(h => [h, h])).values()].slice(0, 12);
+                tickerElem.innerHTML = uniqueHeadlines.map(t => `🔹 ${t}`).join('   ✦   ');
+            } else {
+                tickerElem.innerHTML = '🌍 AFRIKA VIZION · Latest narratives across the diaspora · stay informed ✨';
+            }
+            
+        } catch (error) {
+            console.error('grid render error', error);
+            container.innerHTML = `
+                <div style="grid-column:1/-1; background:rgba(0,0,0,0.7); border-radius:2rem; padding:2rem; text-align:center;">
+                    <i class="fas fa-cloud-moon fa-2x"></i> <p>signal drift · tap sync to reconnect</p>
+                    <button onclick="refreshAllContent()" style="background:#f0b27a; border:none; padding:0.5rem 1.2rem; border-radius:60px; margin-top:1rem;">⟳ retry</button>
+                </div>
+            `;
         }
     }
     
-    // Auto init
+    // refresh all content (news + timestamp)
+    async function refreshAllContent() {
+        await renderImmersiveGrid();
+        updateChronos();
+    }
+    
+    // optional: change feature video occasionally (just for dynamism)
+    function rotateSpotlightVideo() {
+        const videos = [
+            'https://www.youtube.com/embed/7HhC1NjxVJg',
+            'https://www.youtube.com/embed/l1YmS_VDxFQ',
+            'https://www.youtube.com/embed/wR7HXK5O7lA',
+            'https://www.youtube.com/embed/bCQ3oR7_5gE'
+        ];
+        const randomVideo = videos[Math.floor(Math.random() * videos.length)];
+        const iframe = document.getElementById('featureVideo');
+        if (iframe) iframe.src = randomVideo + '?autoplay=0&rel=0';
+    }
+    
+    // initial load
     document.addEventListener('DOMContentLoaded', () => {
-        fetchAllNews();
-        setInterval(fetchAllNews, 5 * 60 * 1000);
+        renderImmersiveGrid();
+        setInterval(() => {
+            renderImmersiveGrid(); // auto refresh every 4 min
+        }, 4 * 60 * 1000);
+        setInterval(rotateSpotlightVideo, 50 * 1000); // fresh video context
     });
 </script>
 </body>
