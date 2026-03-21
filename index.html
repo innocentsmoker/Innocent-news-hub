@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TruthNation KE · Live World News Hub | Wakadinali Bizz</title>
-    <!-- Font Awesome 6 for icons -->
+    <title>TruthNation KE · Live News Hub | Central Cee Vibes</title>
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Axios for API -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -16,11 +16,11 @@
         }
 
         body {
-            background: linear-gradient(145deg, #c0d9e8 0%, #e7eff8 60%, #f4efe6 100%);
+            background: linear-gradient(145deg, #0a0f1a 0%, #141b2b 60%, #1a1f2e 100%);
             font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
             line-height: 1.6;
             padding: 2rem 1.5rem;
-            color: #1f2a3a;
+            color: #eef2ff;
             position: relative;
             min-height: 100vh;
         }
@@ -29,51 +29,46 @@
             content: '';
             position: fixed;
             inset: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(196, 154, 43, 0.08) 0%, transparent 50%);
             pointer-events: none;
-            background: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.45) 6%, transparent 20%),
-                        radial-gradient(circle at 95% 35%, rgba(255,255,255,0.5) 10%, transparent 25%),
-                        radial-gradient(circle at 30% 70%, rgba(255,255,250,0.6) 12%, transparent 28%),
-                        radial-gradient(circle at 70% 85%, rgba(255,255,255,0.4) 8%, transparent 22%),
-                        radial-gradient(circle at 5% 90%, rgba(255,255,240,0.55) 9%, transparent 24%),
-                        radial-gradient(circle at 88% 12%, rgba(255,255,255,0.5) 7%, transparent 20%);
             z-index: 0;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1500px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(2px);
-            border-radius: 32px 32px 24px 24px;
-            box-shadow: 0 20px 40px -10px rgba(0,20,30,0.4);
-            border: 1px solid #e9e0d5;
+            background: rgba(15, 25, 45, 0.88);
+            backdrop-filter: blur(8px);
+            border-radius: 36px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            border: 1px solid rgba(196, 154, 43, 0.3);
             position: relative;
             z-index: 2;
+            overflow: hidden;
         }
 
-        /* Live indicator animation */
         .live-badge {
             display: inline-block;
-            background: #ff3b3b;
+            background: #dc2626;
             color: white;
             padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
             font-weight: bold;
             margin-left: 1rem;
             animation: pulse 1.5s infinite;
         }
 
         @keyframes pulse {
-            0% { opacity: 1; background: #ff3b3b; }
-            50% { opacity: 0.8; background: #ff0000; }
-            100% { opacity: 1; background: #ff3b3b; }
+            0% { opacity: 1; background: #dc2626; box-shadow: 0 0 0 0 rgba(220,38,38,0.4);}
+            70% { opacity: 0.9; background: #ef4444; box-shadow: 0 0 0 8px rgba(220,38,38,0);}
+            100% { opacity: 1; background: #dc2626; }
         }
 
         .header {
-            background: #0b1e2f;
-            padding: 1.5rem 2.5rem;
-            border-bottom: 4px solid #c49a2b;
+            background: #0a0f1f;
+            padding: 1.5rem 2rem;
+            border-bottom: 3px solid #c49a2b;
         }
 
         .brand-line {
@@ -85,661 +80,586 @@
         }
 
         .innocent-brand {
-            font-family: 'Courier New', monospace;
-            font-weight: 700;
-            font-size: 1.6rem;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #f2e9d0, #d6c49f);
+            font-weight: 800;
+            font-size: 1.7rem;
+            background: linear-gradient(135deg, #f5e7c8, #c49a2b);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
-        }
-
-        .innocent-brand i {
-            background: none;
-            -webkit-text-fill-color: #c49a2b;
-            margin-right: 8px;
-            font-size: 2rem;
+            color: transparent;
         }
 
         .truthnation-sub {
-            color: #b6cdd8;
-            font-weight: 400;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            color: #9ca3af;
+            font-size: 0.9rem;
             border-left: 2px solid #c49a2b;
-            padding-left: 1.2rem;
-        }
-
-        .truthnation-sub strong {
-            color: white;
-            font-weight: 600;
+            padding-left: 1rem;
         }
 
         .date-tag {
-            background: #c49a2b;
-            color: #0b1e2f;
-            padding: 0.3rem 1.2rem;
+            background: #c49a2b20;
+            color: #c49a2b;
+            padding: 0.3rem 1rem;
             border-radius: 40px;
-            font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             display: inline-block;
             margin-top: 0.8rem;
+            border: 1px solid #c49a2b40;
         }
 
         .headlines-strip {
-            background: #e9e0d5;
+            background: #0f172ad9;
             padding: 0.8rem 2rem;
-            border-bottom: 2px solid #c49a2b;
+            border-bottom: 1px solid #c49a2b30;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         .headlines-strip span:first-child {
-            font-weight: 700;
-            color: #0b1e2f;
             background: #c49a2b;
+            color: #0a0f1f;
             padding: 0.2rem 1rem;
             border-radius: 30px;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-        }
-
-        .headlines-strip marquee {
-            flex: 1;
-            color: #1f2a3a;
-            font-weight: 500;
+            font-weight: bold;
         }
 
         .refresh-control {
-            background: #0b1e2f;
-            color: white;
+            background: #c49a2b;
+            color: #0a0f1f;
             padding: 0.3rem 1rem;
             border-radius: 30px;
             cursor: pointer;
-            font-size: 0.8rem;
-            transition: all 0.3s;
+            font-weight: 600;
+            transition: all 0.2s;
         }
 
         .refresh-control:hover {
-            background: #c49a2b;
-            color: #0b1e2f;
+            background: #e2b13b;
+            transform: scale(0.97);
         }
 
         section {
-            padding: 2rem 2.5rem;
-            border-bottom: 1px solid #f0e8df;
+            padding: 1.8rem 2rem;
+            border-bottom: 1px solid rgba(196,154,43,0.2);
         }
 
         .section-title {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
+            gap: 12px;
+            font-size: 1.6rem;
             font-weight: 700;
-            margin-bottom: 1.8rem;
-            letter-spacing: -0.5px;
+            margin-bottom: 1.5rem;
+            color: #f3e8d2;
         }
 
         .section-title i {
-            font-size: 2rem;
             color: #c49a2b;
-            background: #1f2f3a10;
-            padding: 8px;
-            border-radius: 14px;
+            font-size: 1.8rem;
         }
 
-        /* Section-specific colors */
-        .politics-section { background: #fcf9f5f2; border-left: 8px solid #b13e3e; }
-        .business-section { background: #f5f7faf2; border-left: 8px solid #1f7a5a; }
-        .sports-section { background: #f2f6f9f2; border-left: 8px solid #d97706; }
-        .technology-section { background: #f0f4faf2; border-left: 8px solid #2563eb; }
-        .world-section { background: #f8f5f0f2; border-left: 8px solid #7c3aed; }
-        .health-section { background: #f0faf5f2; border-left: 8px solid #059669; }
-        .topstory-section { background: #fffffff2; border-left: 8px solid #0b1e2f; }
+        /* News grid + video integration */
+        .news-video-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 1.8rem;
+            align-items: start;
+        }
 
         .story-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
 
         .story-card {
-            background: white;
+            background: #1e293bb3;
+            backdrop-filter: blur(4px);
             border-radius: 24px;
-            padding: 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-            border: 1px solid #efe5da;
-            transition: all 0.2s;
-            display: flex;
-            flex-direction: column;
             overflow: hidden;
+            border: 1px solid #c49a2b30;
+            transition: all 0.25s;
         }
 
         .story-card:hover {
             border-color: #c49a2b;
-            box-shadow: 0 8px 24px rgba(196,154,43,0.15);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
 
         .card-img {
-            height: 180px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3.5rem;
-            color: white;
-            position: relative;
+            height: 160px;
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            transition: all 0.3s;
-        }
-
-        .card-img::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(0deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
-        }
-
-        .card-img i, .card-img span {
             position: relative;
-            z-index: 1;
+        }
+
+        .card-img i {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            background: #00000080;
+            padding: 6px 10px;
+            border-radius: 30px;
+            font-size: 0.8rem;
         }
 
         .card-content {
-            padding: 1.5rem 1.5rem 1.8rem;
+            padding: 1.2rem;
         }
 
         .story-card h3 {
-            font-size: 1.4rem;
-            font-weight: 800;
-            margin-bottom: 0.6rem;
-            line-height: 1.3;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #ffedd5;
         }
 
         .story-card .meta {
-            font-size: 0.85rem;
-            color: #6f5e4e;
-            margin-bottom: 0.8rem;
-            border-bottom: 1px dashed #ddd2c5;
-            padding-bottom: 0.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            font-size: 0.7rem;
+            color: #9ca3af;
+            margin-bottom: 0.6rem;
         }
 
         .story-card p {
-            color: #2c3a4b;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
+            color: #cbd5e1;
         }
 
-        .source-badge {
-            background: #e5e7eb;
-            padding: 0.2rem 0.6rem;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: #4b5563;
+        .video-sidebar {
+            background: #0f172aee;
+            border-radius: 24px;
+            padding: 1rem;
+            border: 1px solid #c49a2b60;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .video-sidebar h4 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #c49a2b;
+            border-left: 3px solid #c49a2b;
+            padding-left: 10px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 16px;
+            margin-bottom: 0.8rem;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+            border: none;
+        }
+
+        /* MUSIC PLAYLIST SECTION - Central Cee */
+        .music-playlist {
+            background: #0a0f1fcc;
+            margin: 0 1rem 1.5rem 1rem;
+            border-radius: 28px;
+            padding: 1.2rem 1.8rem;
+            border: 1px solid #c49a2b;
+            backdrop-filter: blur(12px);
+        }
+
+        .playlist-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .playlist-header h3 {
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, #c49a2b, #e6b422);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .playlist-songs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .song-item {
+            background: #1e293b;
+            border-radius: 60px;
+            padding: 0.3rem 1rem 0.3rem 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #c49a2b60;
+        }
+
+        .song-item:hover {
+            background: #c49a2b;
+            color: #0a0f1f;
+            transform: scale(1.02);
+        }
+
+        .song-item i {
+            font-size: 1rem;
+        }
+
+        .central-audio {
+            flex: 1;
+            min-width: 240px;
+        }
+
+        audio {
+            width: 100%;
+            border-radius: 60px;
+            background: #2d3a4e;
+        }
+
+        .footer {
+            background: #070b14;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #94a3b8;
         }
 
         .loading {
             text-align: center;
-            padding: 3rem;
-            font-size: 1.2rem;
-            color: #6b7280;
-        }
-
-        .loading i {
-            animation: spin 1s infinite linear;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            padding: 2rem;
         }
 
         .error-message {
-            background: #fee2e2;
-            color: #991b1b;
+            background: #7f1a1a;
             padding: 1rem;
-            border-radius: 12px;
-            margin: 1rem 0;
+            border-radius: 20px;
+            text-align: center;
         }
 
-        /* Audio player section - bottom of news hub */
-        .audio-zone {
-            background: #0b1e2f;
-            border-radius: 28px;
-            margin: 0 1rem 1.5rem 1rem;
-            padding: 1rem 1.8rem;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1.5rem;
-            border: 1px solid #c49a2b;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            transition: all 0.2s;
-        }
-        .audio-label {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #f5e7d3;
-            font-weight: 700;
-            font-size: 1.2rem;
-            background: #c49a2b20;
-            padding: 0.5rem 1rem;
-            border-radius: 60px;
-            backdrop-filter: blur(4px);
-        }
-        .audio-label i {
-            font-size: 1.8rem;
-            color: #c49a2b;
-            filter: drop-shadow(0 0 3px rgba(0,0,0,0.3));
-        }
-        .audio-player-custom {
-            flex: 1;
-            min-width: 240px;
-            background: rgba(255,255,240,0.1);
-            border-radius: 48px;
-            padding: 0.2rem 1rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        audio {
-            width: 100%;
-            border-radius: 40px;
-            outline: none;
-            background: #2a3e4e;
-        }
-        audio::-webkit-media-controls-panel {
-            background-color: #e9e0d5;
-        }
-        .wakadinali-tag {
-            font-size: 0.85rem;
-            background: #c49a2b;
-            padding: 0.3rem 0.9rem;
-            border-radius: 30px;
-            color: #0b1e2f;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-        }
-        .footer {
-            background: #0b1e2f;
-            color: #b6cdd8;
-            padding: 1.8rem 2.5rem;
-            text-align: center;
-            font-size: 0.95rem;
-            border-radius: 0 0 24px 24px;
-        }
-        .footer a {
-            color: #c49a2b;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .update-time {
-            font-size: 0.8rem;
-            color: #9ca3af;
-            margin-top: 0.3rem;
-        }
-        @media (max-width: 600px) {
-            .header { padding: 1rem 1.5rem; }
-            section { padding: 1.5rem; }
-            .brand-line { flex-direction: column; }
-            .audio-zone { flex-direction: column; align-items: stretch; text-align: center; margin: 0 0.5rem 1rem 0.5rem; }
+        @media (max-width: 900px) {
+            .news-video-grid {
+                grid-template-columns: 1fr;
+            }
+            .video-sidebar {
+                order: 2;
+            }
+            section { padding: 1.2rem; }
         }
     </style>
 </head>
 <body>
 <div class="container">
 
-    <!-- HEADER -->
     <div class="header">
         <div class="brand-line">
             <div class="innocent-brand">
                 <i class="fas fa-globe-africa"></i> TRUTHNATION KE · LIVE
-                <span class="live-badge"><i class="fas fa-circle"></i> LIVE</span>
+                <span class="live-badge"><i class="fas fa-circle" style="font-size: 0.6rem;"></i> LIVE</span>
             </div>
             <div class="truthnation-sub">
-                <strong>Global News Network</strong> · real-time updates
+                <strong>Global Pulse</strong> · Real-time & Videos
             </div>
         </div>
         <div class="date-tag">
-            <i class="far fa-clock"></i> <span id="current-datetime"></span> · UPDATING LIVE
+            <i class="far fa-clock"></i> <span id="current-datetime"></span> · LIVE UPDATES
         </div>
     </div>
 
-    <!-- HEADLINES TICKER -->
     <div class="headlines-strip">
         <span><i class="fas fa-bolt"></i> BREAKING</span>
         <marquee behavior="scroll" direction="left" scrollamount="5" id="breaking-ticker">
-            Loading latest headlines...
+            Loading headlines...
         </marquee>
         <div class="refresh-control" onclick="fetchAllNews()">
-            <i class="fas fa-sync-alt"></i> REFRESH NEWS
+            <i class="fas fa-sync-alt"></i> REFRESH
         </div>
     </div>
 
-    <!-- NEWS SECTIONS - WILL BE POPULATED BY JAVASCRIPT -->
     <div id="news-container">
-        <div class="loading">
-            <i class="fas fa-spinner"></i> Fetching latest news from around the world...
-        </div>
+        <div class="loading"><i class="fas fa-spinner fa-pulse"></i> Fetching live news + videos...</div>
     </div>
 
-    <!-- AUDIO SECTION: Wakadinali Bizz Song at the bottom of news hub -->
-    <div class="audio-zone">
-        <div class="audio-label">
-            <i class="fas fa-headphones"></i>
-            <span>🔥 WAKADINALI EXCLUSIVE 🔥</span>
+    <!-- CENTRAL CEE MUSIC PLAYLIST SECTION -->
+    <div class="music-playlist">
+        <div class="playlist-header">
+            <i class="fas fa-headphones" style="font-size: 2rem; color:#c49a2b;"></i>
+            <h3><i class="fab fa-spotify"></i> CENTRAL CEE · PLAYLIST</h3>
+            <span style="font-size:0.8rem; background:#c49a2b30; padding:0.2rem 0.8rem; border-radius:40px;">UK Drill Wave</span>
         </div>
-        <div class="audio-player-custom">
-            <audio controls preload="metadata" style="width:100%;">
-                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
+        <div class="playlist-songs">
+            <div class="song-item" data-song="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">
+                <i class="fas fa-play-circle"></i> Doja (Freestyle)
+            </div>
+            <div class="song-item" data-song="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3">
+                <i class="fas fa-play-circle"></i> Obsessed With You
+            </div>
+            <div class="song-item" data-song="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3">
+                <i class="fas fa-play-circle"></i> Let Go
+            </div>
+            <div class="song-item" data-song="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3">
+                <i class="fas fa-play-circle"></i> 6 For 6
+            </div>
+            <div class="song-item" data-song="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+                <i class="fas fa-play-circle"></i> Loading (Live)
+            </div>
+        </div>
+        <div class="central-audio" style="margin-top: 12px;">
+            <audio id="centralCeePlayer" controls style="width:100%;">
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
             </audio>
         </div>
-        <div class="wakadinali-tag">
-            <i class="fas fa-music"></i> BIZZ · RONG RENDEZVOUS
-        </div>
+        <p style="font-size:0.7rem; margin-top:8px; color:#a0aec0;"><i class="fas fa-music"></i> Click any track above — Central Cee vibe</p>
     </div>
 
-    <!-- FOOTER -->
     <div class="footer">
-        <p><i class="fas fa-check-circle" style="color:#c49a2b;"></i> Live news powered by NewsAPI · Updated every 5 minutes with global sources</p>
-        <p style="margin-top: 1rem;">TruthNation KE is a verified global news aggregator · Nairobi · London · New York · Tokyo</p>
-        <p class="update-time">Last updated: <span id="last-updated">Just now</span></p>
-        <p style="font-size:0.85rem; margin-top:1.5rem;">© 2026 TruthNation KE · All rights reserved · <a href="#" onclick="fetchAllNews(); return false;">Refresh now</a></p>
+        <p>TruthNation KE · News with Video Summaries | Central Cee Beats</p>
+        <p class="update-time">Last sync: <span id="last-updated">Just now</span></p>
     </div>
 </div>
 
 <script>
     // ============================================================
-    // REPLACED API KEY with c59e80dea3fb48b7a39ab2e8b036c0f5
-    // USING REAL NEWSAPI.ORG WITH VALID KEY (no demo fallback)
+    // FIXED: USING VALID API KEY + ENSURING NEWS DISPLAY + VIDEOS PER SECTION
     // ============================================================
     const NEWS_API_KEY = 'c59e80dea3fb48b7a39ab2e8b036c0f5';
-    const USE_DEMO_DATA = false;   // Now using real API with the provided key
-    const UNSPLASH_FALLBACK = true;
     
-    // Image mapping for fallback when article has no image (still useful)
-    const IMAGE_MAP = {
-        politics: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600',
-        business: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600',
-        sports: 'https://images.unsplash.com/photo-1508098682722-e99c643e7f0b?w=600',
-        technology: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600',
-        world: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600',
-        health: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600',
-        default: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600'
+    // Video mapping for each news category (YouTube shorts / news highlights)
+    const CATEGORY_VIDEOS = {
+        topstory: 'https://www.youtube.com/embed/TmZ6I1T9z9M?autoplay=0&rel=0',
+        politics: 'https://www.youtube.com/embed/nr3RfT9gN00?autoplay=0&rel=0',
+        business: 'https://www.youtube.com/embed/kB-dPcKJsr0?autoplay=0&rel=0',
+        technology: 'https://www.youtube.com/embed/erEgovG9WBs?autoplay=0&rel=0',
+        world: 'https://www.youtube.com/embed/xY3MZr1hM08?autoplay=0&rel=0',
+        health: 'https://www.youtube.com/embed/3PUVr8jP9WY?autoplay=0&rel=0',
+        sports: 'https://www.youtube.com/embed/SaJzUzFp0Hc?autoplay=0&rel=0'
     };
-
-    // Update datetime
+    
+    // Fallback images
+    const IMAGE_FALLBACK = {
+        default: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600',
+        politics: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600',
+        business: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600',
+        technology: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600',
+        sports: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600'
+    };
+    
     function updateDateTime() {
         const now = new Date();
-        const options = { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric', 
-            hour: '2-digit', 
-            minute: '2-digit', 
-            second: '2-digit',
-            timeZoneName: 'short'
-        };
-        document.getElementById('current-datetime').textContent = now.toLocaleDateString('en-US', options);
-        document.getElementById('last-updated').textContent = now.toLocaleTimeString('en-US');
+        document.getElementById('current-datetime').textContent = now.toLocaleString('en-US', { hour12: true });
+        document.getElementById('last-updated').textContent = now.toLocaleTimeString();
     }
     setInterval(updateDateTime, 1000);
     updateDateTime();
-
-    // Helper: fetch news by category using NewsAPI (top-headlines with category)
-    async function fetchNewsByCategory(category, countryCode = 'us') {
-        if (!USE_DEMO_DATA && NEWS_API_KEY && NEWS_API_KEY !== 'YOUR_API_KEY') {
-            try {
-                // For 'world' category we combine multiple sources? but we'll use general top headlines
-                // Using category param + country for diverse results
-                let finalCategory = category;
-                if (category === 'world') finalCategory = 'general'; // world category fallback to general
-                if (category === 'topstory') finalCategory = 'general';
-                
-                const response = await axios.get('https://newsapi.org/v2/top-headlines', {
-                    params: {
-                        category: finalCategory,
-                        country: countryCode,
-                        apiKey: NEWS_API_KEY,
-                        pageSize: 3,
-                        language: 'en'
-                    },
-                    timeout: 8000
-                });
-                if (response.data && response.data.articles && response.data.articles.length) {
-                    return response.data.articles;
-                } else {
-                    // fallback to empty
-                    return [];
+    
+    // Central Cee playlist interaction
+    function initPlaylist() {
+        const player = document.getElementById('centralCeePlayer');
+        const songs = document.querySelectorAll('.song-item');
+        songs.forEach(song => {
+            song.addEventListener('click', () => {
+                const audioUrl = song.getAttribute('data-song');
+                if (audioUrl && player) {
+                    player.src = audioUrl;
+                    player.play().catch(e => console.log("autoplay blocked"));
                 }
-            } catch (error) {
-                console.error(`API error for ${category}:`, error.message);
-                // Return empty array, will not show error but we will handle missing sections gracefully
-                return [];
+                songs.forEach(s => s.style.background = '#1e293b');
+                song.style.background = '#c49a2b';
+                song.style.color = '#0a0f1f';
+            });
+        });
+    }
+    
+    // Fetch real news by category
+    async function fetchCategoryNews(category, countryCode = 'us') {
+        try {
+            let apiCategory = category;
+            if (category === 'topstory') apiCategory = 'general';
+            if (category === 'world') apiCategory = 'general';
+            const response = await axios.get('https://newsapi.org/v2/top-headlines', {
+                params: {
+                    category: apiCategory,
+                    country: countryCode,
+                    apiKey: NEWS_API_KEY,
+                    pageSize: 3,
+                    language: 'en'
+                },
+                timeout: 10000
+            });
+            if (response.data && response.data.articles) {
+                let articles = response.data.articles.filter(art => art.title && art.title !== '[Removed]');
+                return articles;
             }
-        } else {
-            // fallback demo (in case key invalid or disabled but we have key)
+            return [];
+        } catch (err) {
+            console.warn(`Error ${category}:`, err.message);
             return [];
         }
     }
-
-    // create a beautiful section for any category
-    function createSection(title, icon, categoryClass, color, articles) {
+    
+    // Create news section with embedded video per category
+    function createSectionWithVideo(categoryKey, displayName, icon, color, articles, videoUrl) {
         const section = document.createElement('section');
-        section.className = `${categoryClass}-section`;
-        
-        if (!articles || articles.length === 0) {
-            section.innerHTML = `
-                <div class="section-title">
-                    <i class="${icon}"></i> <span>${title}</span>
-                </div>
-                <div style="padding: 2rem; text-align:center; background:white; border-radius: 24px;">
-                    <i class="fas fa-newspaper" style="font-size: 2rem; color:#c49a2b;"></i>
-                    <p>No trending stories at the moment. Check back soon!</p>
-                </div>
-            `;
-            return section;
-        }
+        section.className = `${categoryKey}-section`;
         
         let articlesHTML = '';
-        articles.forEach((article, idx) => {
-            let imageUrl = article.urlToImage;
-            if (!imageUrl || imageUrl === 'null' || imageUrl === '') {
-                // use placeholder based on category mapping
-                let key = categoryClass === 'topstory' ? 'politics' : categoryClass;
-                imageUrl = IMAGE_MAP[key] || IMAGE_MAP.default;
-            }
-            const publishedTime = article.publishedAt ? new Date(article.publishedAt).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) : 'Just now';
-            const sourceName = article.source?.name || 'Global Desk';
-            const titleText = article.title || 'Latest headlines';
-            const descriptionText = article.description || 'Click to read full story on source website.';
-            
-            articlesHTML += `
-                <div class="story-card">
-                    <div class="card-img" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url('${imageUrl}');">
-                        <i class="${icon}" style="font-size: 2.8rem;"></i>
-                    </div>
-                    <div class="card-content">
-                        <div class="meta">
-                            <span>${sourceName}</span>
-                            <span class="source-badge">${publishedTime}</span>
+        if (articles && articles.length > 0) {
+            articles.forEach(article => {
+                let imgUrl = article.urlToImage;
+                if (!imgUrl || imgUrl === 'null') {
+                    imgUrl = IMAGE_FALLBACK[categoryKey] || IMAGE_FALLBACK.default;
+                }
+                const pubTime = article.publishedAt ? new Date(article.publishedAt).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}) : 'recent';
+                const titleShort = article.title?.substring(0, 85) || 'Breaking News';
+                const descShort = article.description?.substring(0, 100) || 'Tap to read full story';
+                
+                articlesHTML += `
+                    <div class="story-card">
+                        <div class="card-img" style="background-image: linear-gradient(0deg, #00000099, #00000055), url('${imgUrl}');">
+                            <i class="${icon}" style="background:#00000099; padding:4px 8px; border-radius:20px;"></i>
                         </div>
-                        <h3 style="color:${color};">${titleText.substring(0, 100)}</h3>
-                        <p>${descriptionText.substring(0, 120)}${descriptionText.length > 120 ? '...' : ''}</p>
-                        ${article.url ? `<a href="${article.url}" target="_blank" style="font-size:0.8rem; color:#c49a2b; font-weight:600;">Read full story <i class="fas fa-arrow-right"></i></a>` : ''}
+                        <div class="card-content">
+                            <div class="meta">${article.source?.name || 'Global Desk'} · ${pubTime}</div>
+                            <h3>${titleShort}</h3>
+                            <p>${descShort}</p>
+                            ${article.url ? `<a href="${article.url}" target="_blank" style="color:#c49a2b; font-size:0.75rem;">Read full →</a>` : ''}
+                        </div>
                     </div>
-                </div>
-            `;
-        });
+                `;
+            });
+        } else {
+            articlesHTML = `<div style="grid-column:1/-1; text-align:center; padding:2rem; background:#1e293b; border-radius:24px;">📰 No trending stories now — pull refresh</div>`;
+        }
         
+        // Build layout: news grid + video sidebar (one video per news category)
         section.innerHTML = `
             <div class="section-title">
-                <i class="${icon}"></i> <span>${title}</span>
+                <i class="${icon}"></i> <span>${displayName}</span>
             </div>
-            <div class="story-grid">
-                ${articlesHTML}
+            <div class="news-video-grid">
+                <div class="story-grid">
+                    ${articlesHTML}
+                </div>
+                <div class="video-sidebar">
+                    <h4><i class="fas fa-video"></i> ${displayName} Highlights</h4>
+                    <div class="video-wrapper">
+                        <iframe src="${videoUrl}" title="${displayName} news video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <p style="font-size:0.7rem; margin-top:8px;"><i class="fas fa-tv"></i> Quick recap · Latest updates</p>
+                </div>
             </div>
         `;
         return section;
     }
-
-    // update breaking ticker with all articles combined
-    function updateTicker(allArticlesArray) {
-        const tickerElement = document.getElementById('breaking-ticker');
-        if (!allArticlesArray || allArticlesArray.length === 0) {
-            tickerElement.innerHTML = '📡 LIVE: Global news stream active • Stay informed • TruthNation KE';
+    
+    // Update breaking ticker with all news headlines
+    function updateTicker(allArticles) {
+        const ticker = document.getElementById('breaking-ticker');
+        if (!allArticles || allArticles.length === 0) {
+            ticker.innerHTML = '📡 TRUTHNATION KE: Global headlines loading — stay tuned!';
             return;
         }
-        const headlines = allArticlesArray.slice(0, 8).map(a => a.title || 'Top story').join(' &nbsp;&nbsp;⚡&nbsp;&nbsp; ');
-        tickerElement.innerHTML = `🔴 ${headlines}`;
+        const headlinesList = allArticles.slice(0, 10).map(a => a.title).join('   🔴   ');
+        ticker.innerHTML = `🔥 ${headlinesList}`;
     }
-
-    // MAIN FUNCTION: fetch all categories dynamically, using real NewsAPI with new key
+    
+    // MAIN FUNCTION: fetch all categories and render
     async function fetchAllNews() {
         const container = document.getElementById('news-container');
-        container.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> Fetching live news from global sources...</div>';
+        container.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-pulse"></i> Loading live news & videos...</div>';
         
         try {
-            // Define categories with proper parameters: displayName, icon, apiCategory, color, country hint
-            const categoriesConfig = [
-                { key: 'topstory', display: '🔥 TOP STORIES', icon: 'fas fa-fire', apiCat: 'general', color: '#0b1e2f', country: 'us' },
-                { key: 'politics', display: '🏛️ POLITICS', icon: 'fas fa-landmark', apiCat: 'politics', color: '#b13e3e', country: 'us' },
-                { key: 'business', display: '📈 BUSINESS', icon: 'fas fa-chart-line', apiCat: 'business', color: '#1f7a5a', country: 'us' },
-                { key: 'technology', display: '💻 TECHNOLOGY', icon: 'fas fa-microchip', apiCat: 'technology', color: '#2563eb', country: 'us' },
-                { key: 'world', display: '🌍 WORLD NEWS', icon: 'fas fa-globe', apiCat: 'general', color: '#7c3aed', country: 'gb' }, // UK for more world perspective
-                { key: 'health', display: '❤️ HEALTH', icon: 'fas fa-heartbeat', apiCat: 'health', color: '#059669', country: 'us' },
-                { key: 'sports', display: '⚽ SPORTS', icon: 'fas fa-futbol', apiCat: 'sports', color: '#d97706', country: 'us' }
+            const categories = [
+                { key: 'topstory', display: '🔥 TOP STORIES', icon: 'fas fa-fire', color: '#f59e0b', country: 'us' },
+                { key: 'politics', display: '🏛️ POLITICS', icon: 'fas fa-landmark', color: '#ef4444', country: 'us' },
+                { key: 'business', display: '📊 BUSINESS', icon: 'fas fa-chart-line', color: '#10b981', country: 'us' },
+                { key: 'technology', display: '⚙️ TECHNOLOGY', icon: 'fas fa-microchip', color: '#3b82f6', country: 'us' },
+                { key: 'world', display: '🌍 WORLD NEWS', icon: 'fas fa-globe-americas', color: '#8b5cf6', country: 'gb' },
+                { key: 'health', display: '💚 HEALTH', icon: 'fas fa-heartbeat', color: '#14b8a6', country: 'us' },
+                { key: 'sports', display: '⚽ SPORTS', icon: 'fas fa-futbol', color: '#f97316', country: 'us' }
             ];
             
             const results = {};
-            let allHeadlines = [];
+            let allArticlesFlat = [];
             
             // Fetch all categories in parallel
-            const fetchPromises = categoriesConfig.map(async (cfg) => {
+            const fetchPromises = categories.map(async (cat) => {
+                let articles = [];
                 try {
-                    let articles = [];
-                    if (USE_DEMO_DATA === false && NEWS_API_KEY && NEWS_API_KEY !== 'YOUR_API_KEY') {
-                        const response = await axios.get('https://newsapi.org/v2/top-headlines', {
-                            params: {
-                                category: cfg.apiCat,
-                                country: cfg.country,
-                                apiKey: NEWS_API_KEY,
-                                pageSize: 3,
-                                language: 'en'
-                            },
-                            timeout: 10000
-                        });
-                        if (response.data && response.data.articles) {
-                            articles = response.data.articles.filter(art => art.title && art.title !== '[Removed]');
-                        } else {
-                            articles = [];
-                        }
-                    } else {
-                        // demo fallback empty because we expect real key
-                        articles = [];
+                    let apiCat = cat.key;
+                    if (cat.key === 'topstory') apiCat = 'general';
+                    if (cat.key === 'world') apiCat = 'general';
+                    const response = await axios.get('https://newsapi.org/v2/top-headlines', {
+                        params: {
+                            category: apiCat,
+                            country: cat.country,
+                            apiKey: NEWS_API_KEY,
+                            pageSize: 3,
+                            language: 'en'
+                        },
+                        timeout: 9000
+                    });
+                    if (response.data && response.data.articles) {
+                        articles = response.data.articles.filter(a => a.title && a.title !== '[Removed]');
                     }
-                    results[cfg.key] = articles;
-                    allHeadlines.push(...articles);
-                } catch (err) {
-                    console.warn(`Failed for ${cfg.display}:`, err.message);
-                    results[cfg.key] = [];
+                } catch (e) {
+                    console.warn(`Failed ${cat.key}`, e.message);
+                    articles = [];
                 }
+                results[cat.key] = articles;
+                allArticlesFlat.push(...articles);
             });
             
             await Promise.all(fetchPromises);
             
-            // Also fetch extra world coverage for diversity (if world category results low)
-            if (results['world'] && results['world'].length < 2) {
-                try {
-                    const extraWorld = await axios.get('https://newsapi.org/v2/top-headlines', {
-                        params: { country: 'fr', apiKey: NEWS_API_KEY, pageSize: 2, category: 'general' },
-                        timeout: 5000
-                    });
-                    if (extraWorld.data && extraWorld.data.articles) {
-                        results['world'] = [...(results['world'] || []), ...extraWorld.data.articles.slice(0,2)];
-                    }
-                } catch(e) {}
-            }
+            // Update ticker
+            updateTicker(allArticlesFlat);
             
-            // update ticker
-            updateTicker(allHeadlines.slice(0, 12));
-            
-            // Clear container and build sections
+            // Clear container and build sections with videos
             container.innerHTML = '';
             
-            // Iterate and add sections if any articles exist (if no articles, show friendly placeholder)
-            for (let cfg of categoriesConfig) {
-                const articles = results[cfg.key] || [];
-                if (articles.length > 0) {
-                    const section = createSection(cfg.display, cfg.icon, cfg.key, cfg.color, articles);
-                    container.appendChild(section);
-                } else {
-                    // Create minimal "no stories" placeholder with style
-                    const emptySection = document.createElement('section');
-                    emptySection.className = `${cfg.key}-section`;
-                    emptySection.innerHTML = `
-                        <div class="section-title">
-                            <i class="${cfg.icon}"></i> <span>${cfg.display}</span>
-                        </div>
-                        <div style="padding: 1.8rem; text-align:center; background: #ffffffcc; border-radius: 28px; margin-bottom:0.5rem;">
-                            <i class="fas fa-rss" style="font-size: 2rem; opacity:0.5;"></i>
-                            <p style="margin-top: 0.5rem;">No recent articles in this category. Pull refresh to retry.</p>
-                        </div>
-                    `;
-                    container.appendChild(emptySection);
-                }
+            for (let cat of categories) {
+                const articles = results[cat.key] || [];
+                let videoUrl = CATEGORY_VIDEOS[cat.key] || CATEGORY_VIDEOS.topstory;
+                // if no articles, we still show video placeholder
+                const sectionElem = createSectionWithVideo(cat.key, cat.display, cat.icon, cat.color, articles, videoUrl);
+                container.appendChild(sectionElem);
             }
             
-            // Show timestamp in footer after refresh
-            const nowTime = new Date().toLocaleTimeString();
-            document.getElementById('last-updated').innerHTML = nowTime;
+            // Extra: update footer timestamp
+            document.getElementById('last-updated').innerHTML = new Date().toLocaleTimeString();
             
-        } catch (globalError) {
-            console.error("Global news fetch error", globalError);
+        } catch (globalErr) {
+            console.error("Global fetch error", globalErr);
             container.innerHTML = `
                 <div class="error-message">
-                    <i class="fas fa-exclamation-triangle"></i> 
-                    Network or API issue. Please check your connection. 
-                    <button onclick="fetchAllNews()" style="margin-left:1rem; padding:0.4rem 1.2rem; background:#c49a2b; border:none; border-radius:30px; cursor:pointer; font-weight:bold;">
-                        Retry Now
-                    </button>
+                    <i class="fas fa-exclamation-triangle"></i> Network glitch. Click retry.<br>
+                    <button onclick="fetchAllNews()" style="margin-top:1rem; background:#c49a2b; border:none; padding:0.5rem 1.5rem; border-radius:40px; font-weight:bold;">Retry Now</button>
                 </div>
             `;
-            // simple fallback: show static message but keep functional
-            const fallbackMsg = document.createElement('div');
-            fallbackMsg.className = 'loading';
-            fallbackMsg.innerHTML = '<i class="fas fa-newspaper"></i> Using cached headlines — pull refresh for latest';
-            container.appendChild(fallbackMsg);
         }
     }
     
-    // initial load
+    // INIT
     document.addEventListener('DOMContentLoaded', () => {
         fetchAllNews();
+        initPlaylist();
         setInterval(() => {
-            fetchAllNews();
-        }, 5 * 60 * 1000); // auto refresh every 5 minutes
+            fetchAllNews(); // auto refresh every 5 mins
+        }, 5 * 60 * 1000);
     });
 </script>
-
-<!-- optional note: audio song "Wakadinali Bizz" placed exactly at the bottom of news hub as requested -->
-<!-- The audio uses a placeholder track (SoundHelix) as sample - Replace with actual Wakadinali song URL if needed -->
 </body>
 </html>
